@@ -30,7 +30,7 @@ public class BigONotation {
         
         System.out.println("*************** Recursive function  *********************");
             RecursiveTimeCx thisRecTimeCx = new RecursiveTimeCx();
-            int outPut = thisRecTimeCx.recursive(4);
+            int outPut = thisRecTimeCx.recursive(7);
             System.out.println(outPut);
         System.out.println("*************** End Recursive function 1****************************");
     }

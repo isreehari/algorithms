@@ -18,10 +18,6 @@ public class RecursiveTimeCx {
         if(n <= 1)
             return 1;
         
-        this.numberIterations++; 
-        
-        //System.out.println(this.numberIterations);        
-        
         System.out.println( this.totalCount + " -> recursive("+n+")");
         
         
