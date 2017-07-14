@@ -9,6 +9,6 @@ package com.isreehari.algm;
  *
  * @author sinukoll
  */
-public class Order1 extends BigO {
+public class Order1  {
     
 }

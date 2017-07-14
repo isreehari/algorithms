@@ -16,7 +16,11 @@ public class RecursiveTimeCx {
     
     public int recursive(int n){
         if(n <= 1)
-            return 1;        
-        return recursive(n - 1) + recursive(n - 1);
+            return 1;
+        
+        System.out.println( this.totalCount + " -> recursive("+n+")");
+        
+        
+        return this.totalCount = recursive(n - 1) + recursive(n - 1);
     }
 }

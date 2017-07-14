@@ -17,7 +17,7 @@ public class BigONotation {
     public static void main(String... args) {
         // TODO code application logic here
         
-        BigO thisBigO = new BigO(1000);
+    /*    BigO thisBigO = new BigO(1000);
         
         System.out.println("*************** Order 1  *********************");
         
@@ -30,9 +30,27 @@ public class BigONotation {
         
         System.out.println("*************** Recursive function  *********************");
             RecursiveTimeCx thisRecTimeCx = new RecursiveTimeCx();
-            int outPut = thisRecTimeCx.recursive(4);
+            int outPut = thisRecTimeCx.recursive(7);
             System.out.println(outPut);
         System.out.println("*************** End Recursive function 1****************************");
+*/
+    
+        System.out.println("********************************* Insertion sort ******************************");
+        int[] arrayElemtns = {147,87,4,9,6,7};
+        InsertionSort thisListArray = new InsertionSort(arrayElemtns);
+        
+        System.out.print("Assending order of an array: [");        
+        for(int n: thisListArray.doIncrementSort())
+            System.out.print(n + ",");        
+        System.out.println("]");
+        
+        System.out.print("Dessending order of an array: [");
+        for(int n: thisListArray.doDecrementSort())
+            System.out.print(n+",");
+        System.out.println("]");
+        
+        System.out.println("********************************* /Insertion sort ******************************");
+    
     }
     
 }
