@@ -31,7 +31,7 @@ public class UserInput {
         System.out.println("5. Insert a node at the end of the list");
         System.out.println("6. Insert a node after specified node");
         System.out.println("7. Insert a node before a specified node");
-        System.out.println("8 Insert a node at a given position");
+        System.out.println("8. Insert a node at a given position");
         System.out.println("9. Delete first node");
         System.out.println("10. Delete last node");
         System.out.println("11. Delete any node");
@@ -53,7 +53,10 @@ public class UserInput {
             case 2: singleLinkedList.countNumberNodes(); break; 
             case 3: singleLinkedList.searchElement(); break;
             case 4: singleLinkedList.insertNodeInEmptyOrAtStart(); break;
-            case 5: singleLinkedList.insertNodeAtEnd(); break;            
+            case 5: singleLinkedList.insertNodeAtEnd(); break;           
+            case 6: singleLinkedList.insertNodeAfterSpecificNode(); break; 
+            case 7: singleLinkedList.insertNodeBeforeSpecificNode(); break;
+            case 8: singleLinkedList.insertNodeOnSpecificPosition(); break;
             case 19: System.exit(0); break; 
             default: System.out.println(userChoice); break;
         }

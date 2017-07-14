@@ -125,6 +125,117 @@ public class SingleLinkedList {
         System.out.println("New node has been added");
     }
     
+    public void insertNodeAfterSpecificNode(){
+        Node currentNode; 
+        Node newNode;
+        int searchElement;        
+        int newValue;
+        System.out.print("Please enter the specific node value: ");
+        searchElement = this.userInput.nextInt();
+                
+        currentNode = this.startNode;
+        while(currentNode != null){
+            if(searchElement == currentNode.nodeValue){
+                System.out.print("Please enter new node value: ");
+                newValue = this.userInput.nextInt();
+                newNode = new Node(newValue);
+                newNode.nextNodeRef = currentNode.nextNodeRef;
+                currentNode.nextNodeRef = newNode;
+                System.out.println("");
+                System.out.println("New node added after node: " + searchElement);
+                return;
+            }
+            
+            currentNode = currentNode.nextNodeRef;
+        }
+        
+        System.out.println("Opps! The specific nonde has not found");
+    }
+    
+    public void insertNodeBeforeSpecificNode(){
+        Node newNode;
+        Node currentNode; 
+        int searchElement;
+        int newNodeValue;        
+        System.out.print("Please enter specific node value: ");
+        searchElement = this.userInput.nextInt();        
+        currentNode = this.startNode;        
+        while(currentNode != null){
+            if(currentNode.nextNodeRef !=null){
+                if(currentNode.nextNodeRef.nodeValue == searchElement){
+                    System.out.print("Please enter new node value: ");
+                    newNodeValue = this.userInput.nextInt();
+                    newNode = new Node(newNodeValue);
+                    newNode.nextNodeRef = currentNode.nextNodeRef;
+                    currentNode.nextNodeRef = newNode;   
+                    System.out.println("New node has been added to the list");
+                    return;
+                }
+               
+            }else if(currentNode.nodeValue == searchElement ){ // this code will handle if the element is found as first element of the list or if there is only one element in the list.
+                System.out.print("Please enter new node vlaue:");
+                newNodeValue = this.userInput.nextInt();
+                newNode = new Node(newNodeValue);
+                newNode.nextNodeRef = currentNode;
+                this.startNode = newNode;
+                System.out.println("New node has been added to the list");
+                return;
+            }
+        }
+        
+        System.out.println("Opps! the specific node is not found in the list");
+        
+        
+    }
+    
+    public void insertNodeOnSpecificPosition(){
+        Node currentNode;
+        Node newNode;
+        int newNodeValue;
+        int currentPosition = 1; 
+        int beforeCurrentPosition;
+        int specificPosition;
+        System.out.print("Please enter the specific position: ");
+        specificPosition = this.userInput.nextInt();
+        currentNode = this.startNode;
+        while(currentNode != null){            
+            if(specificPosition == 1){
+                System.out.print("Please enter new node value:");
+                newNodeValue = this.userInput.nextInt();
+                newNode = new Node(newNodeValue);
+                newNode.nextNodeRef = currentNode;
+                this.startNode = newNode;
+                System.out.print("New Node has added to list");
+                return;
+            }else{
+                beforeCurrentPosition = currentPosition + 1; 
+                if(beforeCurrentPosition  == specificPosition){
+                System.out.print("Please enter new node value: ");
+                newNodeValue = this.userInput.nextInt();
+                newNode = new Node(newNodeValue);
+                if(currentNode.nextNodeRef == null){
+                   currentNode.nextNodeRef = newNode;
+                }else{
+                    newNode.nextNodeRef = currentNode.nextNodeRef;
+                    currentNode.nextNodeRef = newNode;
+                }
+                
+                System.out.println("New node has been added to list");
+                return; 
+                
+            }
+            }
+            
+            
+            currentPosition++;
+            currentNode = currentNode.nextNodeRef;
+        }
+        
+        System.out.println("Opps! The specified position is not found");
+                
+        
+    }
+    
     
     
     
