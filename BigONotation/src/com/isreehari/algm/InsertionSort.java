@@ -25,10 +25,10 @@ public class InsertionSort {
             int i = 0;
             int key = 0;
             for(int j = 1; j < this.listArray.length; j++ ){                    
-                    key = this.listArray[j];
-                    i = j - 1;
+                    key = this.listArray[j]; // taking the key
+                    i = j - 1; 
                     
-                    while(i >= 0 && this.listArray[i] > key){                            
+                    while(i >= 0 && this.listArray[i] > key){          // checking array[1... j-1] elements with key                   
                             this.listArray[i+1] = this.listArray[i];                            
                             i = i - 1;                        
                     }
@@ -44,10 +44,10 @@ public class InsertionSort {
             int i = 0;
             int key = 0;
             for(int j = 2; j < this.listArray.length; j++){                
-                key = this.listArray[j];
+                key = this.listArray[j]; // taking the key
                 i = j-1;
                 
-                while(i >= 0 && this.listArray[i] < key){
+                while(i >= 0 && this.listArray[i] < key){  // checking array[1... j-1] elements with key         
                     this.listArray[i+1] = this.listArray[i];                    
                     i--;
                 }                
