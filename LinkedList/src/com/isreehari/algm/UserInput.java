@@ -61,6 +61,8 @@ public class UserInput {
             case 10: singleLinkedList.deleteLastNode(); break;
             case 11: singleLinkedList.deleteAnyNode(); break; 
             case 12: singleLinkedList.reverseTheList(); break;
+            case 13: singleLinkedList.bubbleSortByData(); break;
+            case 14: singleLinkedList.bubbleSortByReference(); break;
             case 19: System.exit(0); break; 
             default: System.out.println(userChoice); break;
         }

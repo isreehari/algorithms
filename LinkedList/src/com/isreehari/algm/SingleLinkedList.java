@@ -330,6 +330,73 @@ public class SingleLinkedList {
        
     }
     
+    public void bubbleSortByData(){
+        Node currentNode, nextNode, endNode; 
+        int tempNodeValue;
+        
+        if(checkListIsEmpty())
+            return; 
+        
+        System.out.println("********************* Bubble Sort by Value ****************************");
+        System.out.print("List before bubble sort: ");
+        displayList();
+        //currentNode = this.startNode;        
+        for(endNode = null; endNode != this.startNode.nextNodeRef; endNode = currentNode){                        
+            
+            for(currentNode= this.startNode; currentNode.nextNodeRef != endNode; currentNode = nextNode){              
+                nextNode = currentNode.nextNodeRef;
+                    if(currentNode.nodeValue > nextNode.nodeValue){
+                        tempNodeValue = currentNode.nodeValue;
+                        currentNode.nodeValue = nextNode.nodeValue;
+                        nextNode.nodeValue = tempNodeValue;
+                        
+                    }                
+            }
+            
+        }
+        System.out.print("List after bubble sort: ");
+        displayList();
+        System.out.println("********************* / Bubble Sort Value ****************************");
+        
+    }
+    
+    
+    public void bubbleSortByReference(){
+        Node previousNode, currentNode, nextNode, tempNode, endNode;
+        
+        if(checkListIsEmpty())
+            return;
+        
+        System.out.println("****************** Bubble Sort By Node Reference *********************************");
+        System.out.print("List before sort:");
+        displayList();
+        
+        for(endNode = null; endNode != this.startNode.nextNodeRef; endNode = currentNode){            
+                for(previousNode = currentNode= this.startNode; currentNode.nextNodeRef != endNode; previousNode = currentNode, currentNode = nextNode){
+                    nextNode = currentNode.nextNodeRef;
+                    if(currentNode.nodeValue > nextNode.nodeValue){
+                        currentNode.nextNodeRef = nextNode.nextNodeRef;
+                        nextNode.nextNodeRef = currentNode;
+                        if(currentNode != this.startNode)
+                            previousNode.nextNodeRef = nextNode;
+                        else
+                            this.startNode = nextNode;
+                        
+                        tempNode = currentNode; 
+                        currentNode = nextNode;
+                        nextNode = tempNode;                        
+                    }
+                }
+                
+        }
+         
+        System.out.print("List after sort:");
+        displayList();
+        System.out.println("****************** / Bubble Sort By Node Reference *********************************");
+
+        
+    }
+    
     
     
     
