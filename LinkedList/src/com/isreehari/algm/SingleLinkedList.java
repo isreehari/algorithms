@@ -236,6 +236,100 @@ public class SingleLinkedList {
         
     }
     
+    public void deleteFirstNode(){
+        Node currentNode;
+        if(checkListIsEmpty())
+            return;
+        currentNode = this.startNode.nextNodeRef;
+        this.startNode = currentNode;        
+        System.out.println("First node of the list has been deleted");
+    }
+    
+    public void deleteLastNode(){
+        Node currentNode;
+        if(checkListIsEmpty())
+            return;
+        currentNode = this.startNode;        
+        while(currentNode.nextNodeRef != null){            
+            currentNode = currentNode.nextNodeRef;        
+        }        
+        currentNode.nextNodeRef = null;        
+        System.out.println("Last node of the list has been deleted");            
+    }
+    
+    public void deleteAnyNode(){
+        Node currentNode; 
+        int specifiedNodeValue; 
+        int currentPosition = 1;
+        if(checkListIsEmpty())
+            return; 
+        
+        System.out.print("Please specifie which node you want to delete: ");
+        specifiedNodeValue = this.userInput.nextInt();        
+        currentNode = this.startNode; 
+        
+        while(currentNode != null){
+            if(currentNode.nextNodeRef != null){
+                if(currentNode.nextNodeRef.nodeValue == specifiedNodeValue){
+                    currentNode.nextNodeRef = currentNode.nextNodeRef.nextNodeRef;
+                    System.out.println("The specified node has been deleted from the list");
+                    return ;    
+                } else{ // handling if the specified node is first node with n > 1
+                    if(currentPosition == 1 && currentNode.nodeValue == specifiedNodeValue){
+                        currentNode = currentNode.nextNodeRef; 
+                        this.startNode = currentNode;
+                        System.out.println("The specified node has been deleted from the list");
+                        return;
+                    }
+                }                
+            }else{ // handling if the specified node is first node with n == 1
+                if(currentPosition == 1 && currentNode.nodeValue == specifiedNodeValue){
+                     currentNode = null;
+                     this.startNode = currentNode;
+                     System.out.println("The specified node has been deleted from the list");
+                     return;
+                }
+            }
+            
+            currentPosition++;
+            currentNode = currentNode.nextNodeRef;
+            
+            
+        }
+        
+        System.out.println("Specified Node has not been found.");
+       
+        
+        
+        
+    
+    
+    }
+    
+    public void reverseTheList(){
+        Node previousNode, currentNode, nextNode;
+        
+        if(checkListIsEmpty())
+            return;
+        
+        previousNode = null;
+        currentNode = this.startNode;
+        
+        while(currentNode != null){
+            nextNode = currentNode.nextNodeRef;
+            currentNode.nextNodeRef = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        
+        this.startNode = previousNode; 
+        
+        System.out.println("List has been reversed");
+        
+                
+       
+    }
+    
     
     
     

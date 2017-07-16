@@ -57,6 +57,10 @@ public class UserInput {
             case 6: singleLinkedList.insertNodeAfterSpecificNode(); break; 
             case 7: singleLinkedList.insertNodeBeforeSpecificNode(); break;
             case 8: singleLinkedList.insertNodeOnSpecificPosition(); break;
+            case 9: singleLinkedList.deleteFirstNode(); break;
+            case 10: singleLinkedList.deleteLastNode(); break;
+            case 11: singleLinkedList.deleteAnyNode(); break; 
+            case 12: singleLinkedList.reverseTheList(); break;
             case 19: System.exit(0); break; 
             default: System.out.println(userChoice); break;
         }
