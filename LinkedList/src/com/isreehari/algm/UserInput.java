@@ -20,7 +20,6 @@ public class UserInput {
         SingleLinkedList singleLinkedList = new SingleLinkedList();        
         Scanner userChoiceInput = new Scanner(System.in); 
         
-        
         while(true){
         System.out.println("************************************************************");
         System.out.println("0. Create new list");
@@ -38,32 +37,40 @@ public class UserInput {
         System.out.println("12. Reverse the list");
         System.out.println("13. Bubble sort by exchanging data");
         System.out.println("14. Bubble sort by echanging links");
-        System.out.println("15. MergeSort");
-        System.out.println("16. Insert Cycle");
-        System.out.println("17. Delete Cycle");
-        System.out.println("18. Remove cycle");
-        System.out.println("19. Quit");
+        System.out.println("15. MergeSort By creating new list");
+        System.out.println("16. MergeSort By using existing list");
+        System.out.println("17. MergeSort");
+        System.out.println("18. Insert Cycle");
+        System.out.println("19. Detect Cycle");
+        System.out.println("20. Remove cycle");
+        System.out.println("21. Quit");
         System.out.print("Enter your choice:");
         userChoice = userChoiceInput.nextInt();
         System.out.println("************************************************************");
         
         switch(userChoice){
-            case 0: singleLinkedList.createNewList(); break; 
+            case 0: singleLinkedList.createNewList(userChoiceInput); break; 
             case 1: singleLinkedList.displayList(); break; 
             case 2: singleLinkedList.countNumberNodes(); break; 
-            case 3: singleLinkedList.searchElement(); break;
-            case 4: singleLinkedList.insertNodeInEmptyOrAtStart(); break;
-            case 5: singleLinkedList.insertNodeAtEnd(); break;           
-            case 6: singleLinkedList.insertNodeAfterSpecificNode(); break; 
-            case 7: singleLinkedList.insertNodeBeforeSpecificNode(); break;
-            case 8: singleLinkedList.insertNodeOnSpecificPosition(); break;
+            case 3: singleLinkedList.searchElement(userChoiceInput); break;
+            case 4: singleLinkedList.insertNodeInEmptyOrAtStart(userChoiceInput); break;
+            case 5: singleLinkedList.insertNodeAtEnd(userChoiceInput); break;           
+            case 6: singleLinkedList.insertNodeAfterSpecificNode(userChoiceInput); break; 
+            case 7: singleLinkedList.insertNodeBeforeSpecificNode(userChoiceInput); break;
+            case 8: singleLinkedList.insertNodeOnSpecificPosition(userChoiceInput); break;
             case 9: singleLinkedList.deleteFirstNode(); break;
             case 10: singleLinkedList.deleteLastNode(); break;
-            case 11: singleLinkedList.deleteAnyNode(); break; 
+            case 11: singleLinkedList.deleteAnyNode(userChoiceInput); break; 
             case 12: singleLinkedList.reverseTheList(); break;
             case 13: singleLinkedList.bubbleSortByData(); break;
             case 14: singleLinkedList.bubbleSortByReference(); break;
-            case 19: System.exit(0); break; 
+            case 15: singleLinkedList.mergeSortByNewList(userChoiceInput); break;
+            case 16: singleLinkedList.mergeSortByExistingList(userChoiceInput); break;
+            case 17: singleLinkedList.mergeSort(); break;
+            case 18: singleLinkedList.insertCycle(userChoiceInput); break;
+            case 19: singleLinkedList.detectCycle(); break;
+            case 20: singleLinkedList.removeCycle(); break;
+            case 21:  userChoiceInput.close(); System.exit(0); break; 
             default: System.out.println(userChoice); break;
         }
             
