@@ -5,11 +5,53 @@
  */
 package com.isreehari.algm;
 import java.util.Scanner;
+
+
 /**
  *
  * @author sinukoll
  */
-public class TwoDimentionalSingleLinkedList {
+public class GFG {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        TwoDimentionalSingleLinkedList  listTestCases = new TwoDimentionalSingleLinkedList();
+        Scanner userInput = new Scanner(System.in);
+        listTestCases.createTestCasesLinkedList(userInput);   
+        listTestCases.bubbleSortByNodeData();
+        listTestCases.displayTestCases();        
+        userInput.close();
+    }   
+}
+
+ /**
+ *
+ * @author sinukoll
+ */
+ 
+class TestCases {
+    public Node startNode;
+    public TestCases nextTestCaseRef;
+    
+    public TestCases(Node newTestCaseStartNode){
+        this.startNode = newTestCaseStartNode;
+        this.nextTestCaseRef = null;
+    }
+}
+
+class Node {
+    public int nodeValue;
+    public Node nextNodeRef;
+    public Node(int newNodeValue){
+        this.nodeValue = newNodeValue;
+        this.nextNodeRef = null;
+    }
+    
+}
+class TwoDimentionalSingleLinkedList {
     
     TestCases testCaseStartNode;
     
@@ -17,20 +59,6 @@ public class TwoDimentionalSingleLinkedList {
         this.testCaseStartNode = null;
     }
     
-    
-    /**
-     * @param args the command line arguments
-     */    
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        TwoDimentionalSingleLinkedList  listTestCases = new TwoDimentionalSingleLinkedList();
-        Scanner userInput = new Scanner(System.in);
-        listTestCases.createTestCasesLinkedList(userInput);   
-        listTestCases.bubbleSortByNodeData();
-        listTestCases.displayTestCases();        
-        userInput.close();
-    }
     
     public void createTestCasesLinkedList(Scanner userInput){
         TestCases newTestCase, currentTestCase = null;
