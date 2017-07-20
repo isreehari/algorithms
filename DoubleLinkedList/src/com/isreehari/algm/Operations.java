@@ -32,11 +32,11 @@ public class Operations {
                  else{                     
                      currentNode = this.startNode;
                      
-                     while(currentNode != null){
+                     while(currentNode.nextNode != null){
                         currentNode = currentNode.nextNode;
                      }
                      
-                     newNode.previousNode = currentNode;
+                     newNode.previousNode = currentNode;                     
                      currentNode.nextNode = newNode;                     
                  }
               
@@ -57,10 +57,30 @@ public class Operations {
            while(currentNode != null){
                System.out.print(currentNode.nodeValue);
                System.out.print(" ");
+               currentNode = currentNode.nextNode;
            }
            System.out.print("]");
            System.out.println(" ");
       } 
+      
+      public void countNumberOfNodes(){
+          Node currentNode;
+          int numberOfNodes = 0;
+            
+                if(this.startNode == null){
+                    System.out.println("Opps! List is empty");
+                    return;
+                }
+                
+                currentNode = this.startNode;
+                while(currentNode != null){
+                     numberOfNodes++;
+                     currentNode = currentNode.nextNode;
+                }
+                
+                System.out.println("Number of nodes in the list is: " + numberOfNodes);
+          
+      }
       
       
       public void searchElement(Scanner inputScanner){
@@ -81,6 +101,8 @@ public class Operations {
                   System.out.println(searchNodeValue + " has found in the list");
                   return;
               }
+              
+              currentNode = currentNode.nextNode;
           }
           
           System.out.println(searchNodeValue + " node element is not found in the list");
@@ -100,7 +122,7 @@ public class Operations {
               this.startNode.previousNode = newNode;
               this.startNode = newNode;
           }
-              
+              System.out.println("New node has been inserted");
           
       }
       
@@ -118,7 +140,7 @@ public class Operations {
           }          
           else{
                 currentNode = this.startNode;
-                while(currentNode != null){
+                while(currentNode.nextNode != null){
                     currentNode = currentNode.nextNode;
                 }
 
@@ -148,11 +170,17 @@ public class Operations {
                   
                   newNode.nextNode = currentNode.nextNode;
                   newNode.previousNode = currentNode;
-                  currentNode.nextNode.previousNode = newNode;
+                  
+                  if(currentNode.nextNode != null) // handling end node                  
+                    currentNode.nextNode.previousNode = newNode;
+                  
                   currentNode.nextNode = newNode;
+                  
                   System.out.println("New node has been added to list");
                   return;
               }
+              
+              currentNode = currentNode.nextNode;
           }
           
           System.out.println(searchNodeValue + " node has not found in the list");
@@ -180,12 +208,23 @@ public class Operations {
                   newNode = new Node(newNodeValue);
                   
                   newNode.nextNode = currentNode;
-                  newNode.previousNode = currentNode.previousNode;                   
-                  currentNode.previousNode.nextNode = newNode;
-                  currentNode.previousNode = newNode;
+                    
+                  
+                  if(currentNode == this.startNode){ // handling start node
+                      this.startNode = newNode;
+                  }else
+                  {
+                       newNode.previousNode = currentNode.previousNode;    
+                       currentNode.previousNode.nextNode = newNode;                  
+                       currentNode.previousNode = newNode;   
+                  }  
+                  
+                  
                   System.out.println("New node has been added to list");
                   return;
               }
+              
+              currentNode = currentNode.nextNode;
           }
           
           System.out.println(searchNodeValue + " node has not found in the list");
@@ -197,7 +236,8 @@ public class Operations {
       
       public void insertNodeSpecifiedPosition(Scanner inputScanner){
           Node currentNode, newNode;
-          int newNodeValue, searchNodeValue;            
+          int newNodeValue, specifiedPosition;    
+          int currentPosition = 1;
           if(this.startNode ==  null){
               System.out.println("List is empty");
               return;
@@ -205,24 +245,37 @@ public class Operations {
           
           currentNode = this.startNode;
           System.out.print("Please enter search node value:");
-          searchNodeValue = inputScanner.nextInt();
+          specifiedPosition = inputScanner.nextInt();
           
           while(currentNode != null){
-              if(searchNodeValue == currentNode.nodeValue){
+              if(currentPosition == specifiedPosition){
                   System.out.print("Please enter new node value:");
                   newNodeValue = inputScanner.nextInt();
                   newNode = new Node(newNodeValue);
                   
                   newNode.nextNode = currentNode;
-                  newNode.previousNode = currentNode.previousNode;                   
-                  currentNode.previousNode.nextNode = newNode;
-                  currentNode.previousNode = newNode;
+                  
+                    if(currentNode == this.startNode){
+                         this.startNode = newNode;
+                    }else{
+                        
+                        newNode.previousNode = currentNode.previousNode;                   
+                        currentNode.previousNode.nextNode = newNode;
+                        currentNode.previousNode = newNode;
+                    }
+                  
+                  
+                  
                   System.out.println("New node has been added to list");
                   return;
               }
+              
+              currentNode = currentNode.nextNode;
+              
+              currentPosition++;
           }
           
-          System.out.println(searchNodeValue + " node has not found in the list");
+          System.out.println(specifiedPosition + " position has not found in the list");
               
             
           

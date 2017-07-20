@@ -17,7 +17,7 @@ public class DoubleLinkedList {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Operations doubleLinkedListOps = new Operations();
+        Operations doubleLinkedListOps = new Operations();        
         Scanner inputScanner = new Scanner(System.in);
         int userChoice;
         
@@ -42,10 +42,19 @@ public class DoubleLinkedList {
             System.out.println("17. Detect Cycle");
             System.out.println("18. Remove Cycle");
             System.out.println("19. Quit");
-            
+            System.out.print("Please enter your choice: ");
             userChoice = inputScanner.nextInt();
             switch(userChoice){
-                case 21: System.exit(0); break;
+                case 0: doubleLinkedListOps.createNewList(inputScanner); break;
+                case 1: doubleLinkedListOps.displayList(); break;
+                case 2: doubleLinkedListOps.countNumberOfNodes(); break;
+                case 3: doubleLinkedListOps.searchElement(inputScanner); break;
+                case 4: doubleLinkedListOps.insertNodeToEmptyListOrBeginning(inputScanner); break;
+                case 5: doubleLinkedListOps.insertNodeAtEndList(inputScanner);break;
+                case 6: doubleLinkedListOps.insertNodeAfterSpecifiedNode(inputScanner); break;
+                case 7: doubleLinkedListOps.insertNodeBeforeSpecifiedNode(inputScanner); break;
+                case 8: doubleLinkedListOps.insertNodeSpecifiedPosition(inputScanner);  break;
+                case 19: System.exit(0); break;
                 default: System.out.println("Please chose the valid choice."); break;
             }
             
