@@ -34,10 +34,7 @@ public class DoubleLinkedList {
             System.out.println("9. Delete first node");
             System.out.println("10. Delete last node");
             System.out.println("11. Delete any node");
-            System.out.println("12. Reverse the list");
-            System.out.println("13. Bubble sort by exchaning data");
-            System.out.println("14. Bubble sort by exchaning links");
-            System.out.println("15. Mergesort");
+            System.out.println("12. Reverse the list");            
             System.out.println("16. Insert Cycle");
             System.out.println("17. Detect Cycle");
             System.out.println("18. Remove Cycle");
@@ -54,6 +51,10 @@ public class DoubleLinkedList {
                 case 6: doubleLinkedListOps.insertNodeAfterSpecifiedNode(inputScanner); break;
                 case 7: doubleLinkedListOps.insertNodeBeforeSpecifiedNode(inputScanner); break;
                 case 8: doubleLinkedListOps.insertNodeSpecifiedPosition(inputScanner);  break;
+                case 9: doubleLinkedListOps.deleteFirstNode(); break;
+                case 10: doubleLinkedListOps.deleteLastNode(); break;
+                case 11: doubleLinkedListOps.deleteAnyNode(inputScanner); break;
+                case 12: doubleLinkedListOps.reverseList(); break;
                 case 19: System.exit(0); break;
                 default: System.out.println("Please chose the valid choice."); break;
             }

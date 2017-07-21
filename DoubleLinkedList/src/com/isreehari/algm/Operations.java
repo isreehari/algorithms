@@ -281,6 +281,116 @@ public class Operations {
           
       }
       
+      public void deleteFirstNode(){
+         
+            if(this.startNode == null){
+                System.out.println("List is empty");
+                return;
+            }
+            
+            if(this.startNode.nextNode == null)
+                this.startNode = null;
+            else{
+                this.startNode = this.startNode.nextNode;
+                this.startNode.previousNode = null;
+            }            
+            System.out.println("First Node has been deleted");
+      }
+      
+      public void deleteLastNode(){
+          Node currentNode;
+          if(this.startNode == null){
+              System.out.println("List is empty");
+              return;
+          }
+          
+          if(this.startNode.nextNode == null){
+              this.startNode = null;
+              System.out.println("Last node of the list has been deleted");
+              return;
+          }
+          
+          currentNode = this.startNode;
+          while(currentNode.nextNode != null){
+              currentNode = currentNode.nextNode;
+          }          
+          currentNode.previousNode.nextNode = null;          
+          System.out.println("Last node of the list has been deleted");
+         
+      }
+      
+      public void deleteAnyNode(Scanner inputScanner){
+          Node  currentNode;
+          int specifiedNodeValue;
+          
+             if(this.startNode == null){
+                 System.out.println("List is empty");
+                 return;
+             }
+             System.out.println("Please enter node value which you would like to delete");
+             specifiedNodeValue = inputScanner.nextInt();
+             
+             if(this.startNode.nextNode == null && this.startNode.nodeValue == specifiedNodeValue){
+                 this.startNode = null;
+                 System.out.println( specifiedNodeValue +  " Node has been deleted from the list");
+                 return;
+             }
+             
+             currentNode = this.startNode;
+             
+             while(currentNode != null){                 
+                   if(currentNode.nodeValue == specifiedNodeValue){
+                       currentNode.previousNode.nextNode = currentNode.nextNode;
+                       System.out.println( specifiedNodeValue + " node has been deleted");
+                       return;
+                   }          
+                 currentNode = currentNode.nextNode;
+             }
+             
+             System.out.println( specifiedNodeValue + " node has not found in the list");
+      }
+      
+      public void reverseList(){
+          Node  currentNode, nextNode;
+          
+          if(this.startNode == null){
+              System.out.println("List is empty");
+              return;
+          }
+          
+          if(this.startNode.nextNode == null){
+              System.out.println("List has only one node so the reverse of that node will be same");
+              return;
+          }
+          
+          currentNode = this.startNode;              
+          
+          while(currentNode.nextNode != null){         
+              nextNode = currentNode.nextNode;
+              
+              if(currentNode == this.startNode){
+                    currentNode.nextNode = null;
+                    currentNode.previousNode = nextNode;
+              }
+              else{                  
+                  currentNode.nextNode = currentNode.previousNode;
+                  currentNode.previousNode = nextNode;
+                  
+              }
+          
+              currentNode = nextNode;
+          }
+          
+          currentNode.nextNode = currentNode.previousNode;
+          currentNode.previousNode = null;
+          this.startNode = currentNode;
+          
+          System.out.println("List has been reversed");
+          
+          
+          
+      }
+      
       
     
 }
