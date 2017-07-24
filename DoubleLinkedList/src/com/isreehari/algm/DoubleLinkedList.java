@@ -34,11 +34,8 @@ public class DoubleLinkedList {
             System.out.println("9. Delete first node");
             System.out.println("10. Delete last node");
             System.out.println("11. Delete any node");
-            System.out.println("12. Reverse the list");            
-            System.out.println("16. Insert Cycle");
-            System.out.println("17. Detect Cycle");
-            System.out.println("18. Remove Cycle");
-            System.out.println("19. Quit");
+            System.out.println("12. Reverse the list");                      
+            System.out.println("13. Quit");
             System.out.print("Please enter your choice: ");
             userChoice = inputScanner.nextInt();
             switch(userChoice){
@@ -55,7 +52,7 @@ public class DoubleLinkedList {
                 case 10: doubleLinkedListOps.deleteLastNode(); break;
                 case 11: doubleLinkedListOps.deleteAnyNode(inputScanner); break;
                 case 12: doubleLinkedListOps.reverseList(); break;
-                case 19: System.exit(0); break;
+                case 13: System.exit(0); break;
                 default: System.out.println("Please chose the valid choice."); break;
             }
             
