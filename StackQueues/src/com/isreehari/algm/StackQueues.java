@@ -24,6 +24,7 @@ public class StackQueues {
             System.out.println("**************  Main Menu **************");
             System.out.println("1. Stack implementaion with Array");
             System.out.println("2. Stack implementation with Linked list");
+            System.out.println("3. Queue implementation with Array");
             System.out.println("0. Quit the Application");
             System.out.println("**************  /Main Menu **************");
             System.out.print("Please enter your choice: ");
@@ -31,6 +32,7 @@ public class StackQueues {
             switch(userChoice){
                 case 1: thisStackQueues.stackImplementationArray(inputScanner); break;
                 case 2: thisStackQueues.stackImplementationLinkedList(inputScanner); break;
+                case 3: thisStackQueues.queueImplementationArray(inputScanner); break;
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Wrong choice"); break;
             }
@@ -67,8 +69,7 @@ public class StackQueues {
                   default: System.out.println("Wrong choice"); break;
               }
         }
-    }
-    
+    }    
     public void stackImplementationLinkedList(Scanner inputScanner){
         int userChoice, newValue;
         StackLinkedList thisStackLinkedList = new StackLinkedList();
@@ -97,6 +98,46 @@ public class StackQueues {
                 default: System.out.println("Wrong choice");                         
             }
         }
+    }
+    public void queueImplementationArray(Scanner inputScanner){
+        int userChoice, newValue;
+        QueueArray thisQueueArray = new QueueArray(10);
+        while(true){
+              System.out.println("************** Queue implementation with Array **************");
+              System.out.println("1. Insert an element on the queue");
+              System.out.println("2. Delete an element from the queue");
+              System.out.println("3. Display the front element in queue");
+              System.out.println("4. Display all the elements in the queue");
+              System.out.println("5. Display size of the queue");
+              System.out.println("6. Return Main Menu");
+              System.out.println("0. Quit the application");
+              System.out.println("************** /Stack implementation with Array **************");              
+              System.out.print("Please enter your choice: ");
+              userChoice = inputScanner.nextInt();
+              switch(userChoice){
+                  case 1:  
+                           System.out.print("Please enter new value :");
+                           newValue = inputScanner.nextInt();
+                           thisQueueArray.insert(newValue); break; 
+                  case 2:  thisQueueArray.delete(); break;
+                  case 3:  System.out.println("Peek of queue is: "+ thisQueueArray.peek()); break; 
+                  case 4:  
+                           if(thisQueueArray.isEmpty()){                               
+                               System.out.print("Opps! The Queue is empty."); 
+                           }else{
+                                System.out.print("The Queue is: ["); 
+                                thisQueueArray.display(); 
+                                System.out.print("]\n");
+                           }
+                           
+                           break;
+                  case 5:  System.out.println("Size of the queue is: "+ thisQueueArray.size()); break;                  
+                  case 6: return; 
+                  case 0: System.exit(0); break; 
+                  default: System.out.println("Wrong choice"); break;
+              }
+        }
+        
     }
     
 }
