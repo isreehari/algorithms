@@ -10,14 +10,10 @@ import java.util.EmptyStackException;
  * @author sinukoll
  */
 public class StackLinkedList {
-    private Node top;
-    
+    private Node top;    
     public StackLinkedList(){
         this.top = null;
     }
-    
-    
-    
     public int size(){
         Node currentNode;
         int tempSize = 0;
@@ -30,12 +26,10 @@ public class StackLinkedList {
             currentNode = currentNode.nextNode;
         }
         return tempSize;
-    }
-    
+    }    
     public boolean isEmpty(){
         return (this.top == null);
-    }
-    
+    }    
     public void push(int newNodeValue){
         Node newNode = new Node(newNodeValue);
         
@@ -45,16 +39,14 @@ public class StackLinkedList {
         }        
         newNode.nextNode = this.top;
         this.top = newNode;
-    }
-    
+    }    
     public void pop(){
         if(this.isEmpty()){
             System.out.println("Opps! List is empty");
             throw new EmptyStackException();            
         }        
         this.top = this.top.nextNode;
-    }
-    
+    }    
     public int peek(){
         if(this.isEmpty()){
             System.out.println("Opps! List is empty");
@@ -62,8 +54,7 @@ public class StackLinkedList {
         }
         
         return this.top.nodeValue;        
-    }
-    
+    }    
     public void displayAll(){
         Node currentNode;
          
