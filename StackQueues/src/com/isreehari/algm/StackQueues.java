@@ -29,6 +29,7 @@ public class StackQueues {
             System.out.println("5. Queue implementation with Circular Linked List");
             System.out.println("6. Queue implementation with Circular Array");
             System.out.println("7. Deque implementation with Circular Array");
+            System.out.println("8. Priority Queue implementation with Linked List");
             System.out.println("0. Quit the Application");
             System.out.println("**************  /Main Menu **************");
             System.out.print("Please enter your choice: ");
@@ -41,6 +42,7 @@ public class StackQueues {
                 case 5: thisStackQueues.queueImplementationCircularLinkedList(inputScanner);break;
                 case 6: thisStackQueues.queueImplementationCircularArray(inputScanner); break;
                 case 7: thisStackQueues.dequeImplementationCircularArray(inputScanner);break;
+                case 8: thisStackQueues.priorityQueueImplementationLinkedList(inputScanner); break; 
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Wrong choice"); break;
             }
@@ -185,9 +187,9 @@ public class StackQueues {
                            if(thisQueueLinkedList.isEmpty()){                               
                                System.out.print("Opps! The Queue is empty."); 
                            }else{
-                                System.out.print("The Queue is: ["); 
+                                System.out.print("The Queue is: [");                                
                                 thisQueueLinkedList.display(); 
-                                System.out.print("]\n");
+                                System.out.print(" ]\n");
                            }                           
                            break;
                   case 5:   if(thisQueueLinkedList.isEmpty()){
@@ -310,9 +312,9 @@ public class StackQueues {
               System.out.println("2. Insert an element on the deque at rear");
               System.out.println("3. Delete an element from the deque at front");
               System.out.println("4. Delete an element from the deque at rear");
-              System.out.println("5. Display the front element in queue");
-              System.out.println("6. Display all the elements in the queue");
-              System.out.println("7. Display size of the queue");
+              System.out.println("5. Display the front element in Deque");
+              System.out.println("6. Display all the elements in the Deque");
+              System.out.println("7. Display size of the Deque");
               System.out.println("8. Return Main Menu");
               System.out.println("0. Quit the application");
               System.out.println("************** /Stack implementation with Array **************");              
@@ -348,5 +350,64 @@ public class StackQueues {
               }
         }
         
+    }
+    public void priorityQueueImplementationLinkedList(Scanner inputScanner){
+      int userChoice, newValue,newNodePriority;
+        PriorityQueueLinkedList thisPriorityQueueLinkedList = new PriorityQueueLinkedList();
+        while(true){
+              System.out.println("************** Queue implementation with Linked List **************");
+              System.out.println("1. Insert an element on the queue");
+              System.out.println("2. Delete an element from the queue");
+              System.out.println("3. Display the front element in queue");
+              System.out.println("4. Display all the elements in the queue");
+              System.out.println("5. Display size of the queue");
+              System.out.println("6. Return Main Menu");
+              System.out.println("0. Quit the application");
+              System.out.println("************** /Stack implementation with Linked List **************");              
+              System.out.print("Please enter your choice: ");
+              userChoice = inputScanner.nextInt();
+              switch(userChoice){
+                  case 1:  
+                           System.out.print("Please enter new value :");
+                           newValue = inputScanner.nextInt();
+                           System.out.print("Please enter priority: ");
+                           newNodePriority = inputScanner.nextInt();
+                           thisPriorityQueueLinkedList.insert(newValue,newNodePriority); break; 
+                  case 2:   if(thisPriorityQueueLinkedList.isEmpty()){
+                                    System.out.println("Opp! Queue is underflow");
+                            }else{
+                                thisPriorityQueueLinkedList.delete(); 
+                                System.out.println("Element has been deleted"); 
+                            }
+                            break;
+                      
+                  case 3:   if(thisPriorityQueueLinkedList.isEmpty()){
+                                  System.out.println("Opps! Queue is underflow");
+                              }else{
+                                  System.out.println("Peek of queue is: "+ thisPriorityQueueLinkedList.peek());
+                              }
+                                 break; 
+                  case 4:  
+                           if(thisPriorityQueueLinkedList.isEmpty()){                               
+                               System.out.print("Opps! The Queue is empty."); 
+                           }else{
+                                System.out.println("The Queue is:"); 
+                                System.out.println("Element\tPriority");
+                                thisPriorityQueueLinkedList.display(); 
+                                System.out.println();
+                           }                           
+                           break;
+                  case 5:   if(thisPriorityQueueLinkedList.isEmpty()){
+                                System.out.println("Opps! Queue is empty");
+                            }else{
+                                System.out.println("Size of the queue is: "+ thisPriorityQueueLinkedList.size()); break;                  
+                            }
+                            
+                      
+                  case 6: return; 
+                  case 0: System.exit(0); break; 
+                  default: System.out.println("Wrong choice"); break;
+              }
+        }  
     }
 }
