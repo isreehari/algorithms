@@ -21,22 +21,18 @@ public class QueueCircularArray {
         this.queueArray = new int[10]; // Setting maximum size of 
         this.front = -1;
         this.rear = -1;
-    }
-    
+    }    
     public QueueCircularArray(int maximumSize){
         this.queueArray = new int[maximumSize];
         this.front = -1;
         this.rear = -1;
-    }
-    
+    }    
     public boolean isEmpty(){
        return (this.front == -1);
-    }
-    
+    }    
     public boolean isFull(){
         return (this.front == this.rear+1 || (this.front == 0 && this.rear == this.queueArray.length-1));
-    }
-    
+    }    
     public int size(){
         
         int tempSize = 0;
@@ -59,8 +55,7 @@ public class QueueCircularArray {
             
         return tempSize;
             
-    }
-    
+    }    
     public void insert(int newValue){
         if(this.isFull()){ // if the queue is full 
                 System.out.println("Opps! Queue is Overflow\n");
@@ -75,8 +70,7 @@ public class QueueCircularArray {
             this.rear++;
         
         this.queueArray[this.rear] = newValue;        
-    }
-    
+    }    
     public int delete(){
         if(this.isEmpty()){
             System.out.println("Opps! Queue is Underflow");
@@ -95,8 +89,7 @@ public class QueueCircularArray {
         
         
         return tempValue;
-    }
-    
+    }    
     public int peek(){
          if(this.isEmpty()){
              System.out.println("Opps! Queue is Underflow");
@@ -104,8 +97,7 @@ public class QueueCircularArray {
          }
          
         return this.queueArray[this.front];
-    }
-    
+    }    
     public void display(){
         if(this.isEmpty()){
             System.out.println("Opps! Queue is Underflow");

@@ -61,26 +61,16 @@ public class DequeCircularArray {
                 System.out.println("Opps! Queue is Overflow\n");
                 return;
             }
-       
-        
-            
+                
         if(this.front == -1){
             this.front = 0;
             this.rear = 0;
         }else  if(this.front == 0){
             this.front = this.queueArray.length-1;
         }else if(this.front > 0){
-            this.front--;
-                    
+            this.front--;                    
         }
-        
-        
           this.queueArray[this.front] = newValue;    
-        
-         
-        
-        
-        this.queueArray[this.rear] = newValue;        
     }  
       public void insertRear(int newValue){
         if(this.isFull()){ // if the queue is full 
@@ -88,8 +78,10 @@ public class DequeCircularArray {
                 return;
             }
         
-        if(this.front == -1)
-            this.front = 0;
+        if(this.front == -1){
+         this.front = 0;   
+        }
+        
         if(this.rear == this.queueArray.length-1)
             this.rear = 0;
         else
@@ -98,7 +90,7 @@ public class DequeCircularArray {
         this.queueArray[this.rear] = newValue;        
     }  
       
-    public int delete(){
+    public int deleteFront(){
         if(this.isEmpty()){
             System.out.println("Opps! Queue is Underflow");
             throw new EmptyStackException();
@@ -116,7 +108,27 @@ public class DequeCircularArray {
         
         
         return tempValue;
-    }    
+    }
+    public int deleteRear(){
+        if(this.isEmpty()){
+            System.out.println("Opps! Queue is Underflow");
+            throw new EmptyStackException();
+        }
+        int tempValue = this.queueArray[this.rear];
+        
+        if(this.front == this.rear){ // If the queue has only one element
+            this.front = -1;
+            this.rear = -1;
+        }else if(this.rear == 0){
+            this.rear = this.queueArray.length-1;
+        }else
+            this.rear--;
+        
+        
+        
+        return tempValue;
+    }
+
     public int peek(){
          if(this.isEmpty()){
              System.out.println("Opps! Queue is Underflow");

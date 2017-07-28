@@ -28,6 +28,7 @@ public class StackQueues {
             System.out.println("4. Queue implementation with Linked List");
             System.out.println("5. Queue implementation with Circular Linked List");
             System.out.println("6. Queue implementation with Circular Array");
+            System.out.println("7. Deque implementation with Circular Array");
             System.out.println("0. Quit the Application");
             System.out.println("**************  /Main Menu **************");
             System.out.print("Please enter your choice: ");
@@ -39,6 +40,7 @@ public class StackQueues {
                 case 4: thisStackQueues.queueImplementationLinkedList(inputScanner); break;
                 case 5: thisStackQueues.queueImplementationCircularLinkedList(inputScanner);break;
                 case 6: thisStackQueues.queueImplementationCircularArray(inputScanner); break;
+                case 7: thisStackQueues.dequeImplementationCircularArray(inputScanner);break;
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Wrong choice"); break;
             }
@@ -259,7 +261,7 @@ public class StackQueues {
         }
         
     }
-     public void queueImplementationCircularArray(Scanner inputScanner){
+    public void queueImplementationCircularArray(Scanner inputScanner){
         int userChoice, newValue;
         QueueCircularArray thisQueueCircularArray = new QueueCircularArray(4);
         while(true){
@@ -293,6 +295,54 @@ public class StackQueues {
                            break;
                   case 5:  System.out.println("Size of the queue is: "+ thisQueueCircularArray.size()); break;                  
                   case 6: return; 
+                  case 0: System.exit(0); break; 
+                  default: System.out.println("Wrong choice"); break;
+              }
+        }
+        
+    }
+    public void dequeImplementationCircularArray(Scanner inputScanner){
+        int userChoice, newValue;
+        DequeCircularArray thisDequeCircularArray = new DequeCircularArray(6);
+        while(true){
+              System.out.println("************** Queue implementation with Array **************");
+              System.out.println("1. Insert an element on the deque at front");
+              System.out.println("2. Insert an element on the deque at rear");
+              System.out.println("3. Delete an element from the deque at front");
+              System.out.println("4. Delete an element from the deque at rear");
+              System.out.println("5. Display the front element in queue");
+              System.out.println("6. Display all the elements in the queue");
+              System.out.println("7. Display size of the queue");
+              System.out.println("8. Return Main Menu");
+              System.out.println("0. Quit the application");
+              System.out.println("************** /Stack implementation with Array **************");              
+              System.out.print("Please enter your choice: ");
+              userChoice = inputScanner.nextInt();
+              switch(userChoice){
+                  case 1:  
+                           System.out.print("Please enter new value :");
+                           newValue = inputScanner.nextInt();
+                           thisDequeCircularArray.insertFront(newValue); break; 
+                           
+                  case 2:  
+                           System.out.print("Please enter new value :");
+                           newValue = inputScanner.nextInt();
+                           thisDequeCircularArray.insertRear(newValue); break;                            
+                  case 3:  thisDequeCircularArray.deleteFront(); break;
+                  case 4:  thisDequeCircularArray.deleteRear(); break;
+                  case 5:  System.out.println("Peek of queue is: "+ thisDequeCircularArray.peek()); break; 
+                  case 6:  
+                           if(thisDequeCircularArray.isEmpty()){                               
+                               System.out.print("Opps! The Queue is empty."); 
+                           }else{
+                                System.out.print("The Queue is: ["); 
+                                thisDequeCircularArray.display(); 
+                                System.out.print("]\n");
+                           }
+                           
+                           break;
+                  case 7:  System.out.println("Size of the queue is: "+ thisDequeCircularArray.size()); break;                  
+                  case 8: return; 
                   case 0: System.exit(0); break; 
                   default: System.out.println("Wrong choice"); break;
               }
