@@ -30,6 +30,7 @@ public class StackQueues {
             System.out.println("6. Queue implementation with Circular Array");
             System.out.println("7. Deque implementation with Circular Array");
             System.out.println("8. Priority Queue implementation with Linked List");
+            System.out.println("9. Validate Nested paranthses expression ");
             System.out.println("0. Quit the Application");
             System.out.println("**************  /Main Menu **************");
             System.out.print("Please enter your choice: ");
@@ -43,6 +44,7 @@ public class StackQueues {
                 case 6: thisStackQueues.queueImplementationCircularArray(inputScanner); break;
                 case 7: thisStackQueues.dequeImplementationCircularArray(inputScanner);break;
                 case 8: thisStackQueues.priorityQueueImplementationLinkedList(inputScanner); break; 
+                case 9: thisStackQueues.validateExpression(inputScanner); break;
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Wrong choice"); break;
             }
@@ -409,5 +411,12 @@ public class StackQueues {
                   default: System.out.println("Wrong choice"); break;
               }
         }  
+    }
+    public void validatedExpression(Scanner inputScanner){
+        System.out.print("Please enter the expression: ");
+        String inputExpression = inputScanner.nextLine();
+        ValidityExpression thisValidityExpression = new ValidityExpression();
+        thisValidityExpression.isValid(inputExpression);
+                
     }
 }
