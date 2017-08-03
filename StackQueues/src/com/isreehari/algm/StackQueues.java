@@ -412,11 +412,17 @@ public class StackQueues {
               }
         }  
     }
-    public void validatedExpression(Scanner inputScanner){
+    public void validateExpression(Scanner inputScanner){
         System.out.print("Please enter the expression: ");
-        String inputExpression = inputScanner.nextLine();
+        Scanner newInputScanner = new Scanner(System.in);
+        String inputExpression = newInputScanner.nextLine();
         ValidityExpression thisValidityExpression = new ValidityExpression();
-        thisValidityExpression.isValid(inputExpression);
+        if(thisValidityExpression.isValid(inputExpression))
+            System.out.println("Vaild");
+        else
+            System.out.println("In-Valid");
+        
+        //newInputScanner.close();
                 
     }
 }

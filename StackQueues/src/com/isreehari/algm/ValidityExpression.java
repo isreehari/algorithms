@@ -25,9 +25,9 @@ public class ValidityExpression {
                         return false;
                     }else{
                         popSymbol = thisValidityExpressionStack.pop();
-                        if(this.matchParantheses(popSymbol,currentSymbol)){
+                        if(!this.matchParantheses(popSymbol,currentSymbol)){
                             System.out.println("Miss matched parantheses are : ");
-                            System.out.println(currentSymbol + " and " + popSymbol);
+                            System.out.println(popSymbol + " and " + currentSymbol);
                             return false;
                         }
                     }
