@@ -440,8 +440,8 @@ public class StackQueues {
                System.out.println("Opps! Something went wrong");
            else{
                System.out.println("Postfix expression: " + postfix);
-               postfixEvaluationResult = thisPolishNotation.evaluatePostfixExpression(postfix);
-               System.out.println("Postfix evaluation result: " + postfixEvaluationResult);
+              // postfixEvaluationResult = thisPolishNotation.evaluatePostfixExpression(postfix);
+               //System.out.println("Postfix evaluation result: " + postfixEvaluationResult);
            }
     }
     
