@@ -31,6 +31,8 @@ public class StackQueues {
             System.out.println("7. Deque implementation with Circular Array");
             System.out.println("8. Priority Queue implementation with Linked List");
             System.out.println("9. Validate Nested paranthses expression ");
+            System.out.println("10. Infix to Postfix");
+            System.out.println("11. Infix to Prefix");
             System.out.println("0. Quit the Application");
             System.out.println("**************  /Main Menu **************");
             System.out.print("Please enter your choice: ");
@@ -45,6 +47,8 @@ public class StackQueues {
                 case 7: thisStackQueues.dequeImplementationCircularArray(inputScanner);break;
                 case 8: thisStackQueues.priorityQueueImplementationLinkedList(inputScanner); break; 
                 case 9: thisStackQueues.validateExpression(inputScanner); break;
+                case 10: thisStackQueues.infixToPostfix(); break;
+                case 11: thisStackQueues.infixToPrefix(); break;
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Wrong choice"); break;
             }
@@ -425,4 +429,36 @@ public class StackQueues {
         //newInputScanner.close();
                 
     }
+    public void infixToPostfix(){
+          System.out.print("Please enter the expressin: ");
+          Scanner newInputScanner = new Scanner(System.in);
+          String inputExpression =  newInputScanner.nextLine();
+          PolishNotation thisPolishNotation = new PolishNotation();
+          String postfix = thisPolishNotation.infixToPostFix(inputExpression);
+          long postfixEvaluationResult = 0;
+           if(postfix.isEmpty())
+               System.out.println("Opps! Something went wrong");
+           else{
+               System.out.println("Postfix expression: " + postfix);
+               postfixEvaluationResult = thisPolishNotation.evaluatePostfixExpression(postfix);
+               System.out.println("Postfix evaluation result: " + postfixEvaluationResult);
+           }
+    }
+    
+    public void infixToPrefix(){
+        System.out.print("Please enter the expressin: ");
+          Scanner newInputScanner = new Scanner(System.in);
+          String inputExpression =  newInputScanner.nextLine();
+          PolishNotation thisPolishNotation = new PolishNotation();
+          String prefix = thisPolishNotation.infixToPrefix(inputExpression);
+          long prefixEvaluationResult = 0;
+           if(prefix.isEmpty())
+               System.out.println("Opps! Something went wrong");
+           else{
+               System.out.println("Prefix expression: " + prefix);
+               prefixEvaluationResult = thisPolishNotation.evaluatePrefixExpression(prefix);
+               System.out.println("Prefix evaluation result: " + prefixEvaluationResult);
+           }
+    }
+    
 }
