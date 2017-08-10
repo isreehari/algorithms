@@ -18,6 +18,8 @@ import java.util.regex.*;
 
 
 public class Solution {
+    
+    public static int[] tempExpenditure;
 
     static int activityNotifications(int[] expenditure, int d) {
         // Complete this function
@@ -27,10 +29,13 @@ public class Solution {
         
           int median = 0;          
           int numberNotifications = 0;
-          for(int i = 0; i< expenditure.length - 1; i++){
+          for(int i = 0; i<= expenditure.length - d; i++){
               median = findMedian(expenditure, i,d);
-              if(expenditure[i] >= (median * 2))
-                  numberNotifications++;
+              for(int j = d+i; j <= expenditure.length; j++ ){
+                  if(expenditure[i] >= (median * 2))
+                    numberNotifications++;
+              }
+              
           }
               
           return numberNotifications;     
@@ -38,8 +43,13 @@ public class Solution {
     
     static int findMedian(int[] expenditure, int initialIndex, int d){
         int tempMedian = 0; 
-               
-        int[] tempExpenditure = selectionSort(expenditure, initialIndex, d);
+        if(tempExpenditure == null){ // initial sort first d of transactions 
+            tempExpenditure = new int[d];
+            tempExpenditure = selectionSort(expenditure, initialIndex, d);
+        } else{ // After initial sort then insert new value to sorting array
+            
+        }
+        
         int halfLength = d / 2 ; 
         if(d % 2  == 0){ // even number count then take avarage 
             tempMedian = ( tempExpenditure[halfLength] + tempExpenditure[halfLength+1] ) / 2 ;
