@@ -7,6 +7,7 @@ package com.isreehari.hackerrank;
 
 import java.io.*;
 import java.util.*;
+import static java.util.Arrays.sort;
 import java.text.*;
 import java.math.*;
 import java.util.regex.*;
@@ -19,7 +20,7 @@ import java.util.regex.*;
 
 public class Solution {
     
-    public static int[] tempExpenditure;
+    
 
     static int activityNotifications(int[] expenditure, int d) {
         // Complete this function
@@ -29,12 +30,11 @@ public class Solution {
         
           int median = 0;          
           int numberNotifications = 0;
-          for(int i = 0; i<= expenditure.length - d; i++){
-              median = findMedian(expenditure, i,d);
-              for(int j = d+i; j <= expenditure.length; j++ ){
-                  if(expenditure[i] >= (median * 2))
-                    numberNotifications++;
-              }
+          for(int i = 0; i< expenditure.length - d; i++){
+              median = findMedian(expenditure,i,d);                
+                if(expenditure[d+i] >= (median * 2)){
+                      numberNotifications++;
+                  }
               
           }
               
@@ -43,53 +43,52 @@ public class Solution {
     
     static int findMedian(int[] expenditure, int initialIndex, int d){
         int tempMedian = 0; 
-        if(tempExpenditure == null){ // initial sort first d of transactions 
-            tempExpenditure = new int[d];
-            tempExpenditure = selectionSort(expenditure, initialIndex, d);
-        } else{ // After initial sort then insert new value to sorting array
-            
+        
+        int[] tempExpenditure = new int[d];
+        for(int i=initialIndex,j = 0; j < d ; i++, j++){
+                 tempExpenditure[j] = expenditure[i];           
         }
         
+        
+        sort(tempExpenditure); 
+        //tempExpenditure = selectionSort(tempExpenditure);
+        
         int halfLength = d / 2 ; 
-        if(d % 2  == 0){ // even number count then take avarage 
+           
+        if(d % 2  == 0 ){ // even number count then take avarage 
             tempMedian = ( tempExpenditure[halfLength] + tempExpenditure[halfLength+1] ) / 2 ;
         }else{                // odd number count then take median
             tempMedian = tempExpenditure[halfLength];
         }
         
+       /*  for(int i= 0; i < tempExpenditure.length; i++){
+            System.out.print(tempExpenditure[i] + " ");
+        }
+         System.out.print("--> " + tempMedian * 2 + " \n "); */
+                 
         
         return tempMedian; 
         
     }
     
-    static int[] selectionSort(int[] expenditure,int initialIndex, int maximumSortLength){
-        int tempExpenditure = 0;
-        int[] newExpenditure = new int[maximumSortLength];
-       
-         for(int i=initialIndex; i < maximumSortLength ; i++){
-             newExpenditure[i] = expenditure[i];           
-        }
-         for(int i = 0; i< maximumSortLength; i++){             
-             for(int j = 0; j< maximumSortLength - 1 - i; j++)
+    static int[] selectionSort(int[] tempExpenditure){
+        int temp = 0;
+         for(int i = 0; i< tempExpenditure.length; i++){             
+             for(int j = 0; j< tempExpenditure.length - 1 - i; j++)
              {
-                 if(newExpenditure[j] > newExpenditure[j+1]){
-                     tempExpenditure = newExpenditure[j+1];
-                     newExpenditure[j+1] = newExpenditure[j];
-                     newExpenditure[j] = tempExpenditure;
+                 if(tempExpenditure[j] > tempExpenditure[j+1]){
+                     temp = tempExpenditure[j+1];
+                     tempExpenditure[j+1] = tempExpenditure[j];
+                     tempExpenditure[j] = temp;
                  }
              }
-         }
-         
-//         for(int i=0; i < maximumSortLength ; i++){
-//            System.out.print(newExpenditure[i]+" ");
-//             
-//        }
-//         System.out.println();
+         } 
+        
          
                  
         
         
-        return newExpenditure;
+        return tempExpenditure;
     }
 
     public static void main(String[] args) {
