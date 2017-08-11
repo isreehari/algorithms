@@ -3,70 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.isreehari.hackerrank;
+package com.isreehari.algm.sort;
 
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+import java.util.Scanner;
 
 /**
  *
  * @author sinukoll
  */
-
-
-public class Solution {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int d = in.nextInt();
-        int[] expenditure = new int[n];
-        for(int expenditure_i = 0; expenditure_i < n; expenditure_i++){
-            expenditure[expenditure_i] = in.nextInt();
+public class AddressCalculationSort {
+      public static void main(String[] args){
+        Scanner inputScanner = new Scanner(System.in);
+        System.out.println("Please enter array size: ");
+        int arraySize = inputScanner.nextInt();
+        int[] expenditures = new int[arraySize];
+        for(int tempIndex = 0 ; tempIndex < arraySize; tempIndex++){        // Asymptotic Time complexity O(n)     
+             expenditures[tempIndex] = inputScanner.nextInt();            
         }
-        Solution thisSolution = new Solution();
-        int result = thisSolution.activityNotifications(expenditure, d);
-        System.out.println(result);
-        in.close();
+        
+        AddressCalculationSort thisAddressCalculationSort = new AddressCalculationSort();
+        
+        int[] sortedArray = thisAddressCalculationSort.AddressCalculationSort(expenditures);
+        
+        for(int tempIndex=0; tempIndex< sortedArray.length; tempIndex++)
+            System.out.print(sortedArray[tempIndex]);
+        
+        
+        inputScanner.close();
     }
-    public int activityNotifications(int[] expenditure, int d) {
-        // Complete this function
-            if(expenditure.length < 0 || d >= expenditure.length){
-                 return 0;
-             }  
-        
-          double median = 0.0;          
-          int numberNotifications = 0;
-          for(int i = 0; i< expenditure.length - d; i++){
-              median = this.findMedian(expenditure,i,d);                
-                if(expenditure[d+i] >= (median * 2)){                    
-                      numberNotifications++;
-                  }
-             // System.out.println(expenditure[d+i] + " --> " +numberNotifications);
-              
-          }
-              
-          return numberNotifications;     
-    }    
-    public double findMedian(int[] expenditure, int initialIndex, int d){
-        double tempMedian = 0;         
-        int[] tempExpenditure = Arrays.copyOfRange(expenditure,initialIndex, initialIndex+d);        
-        tempExpenditure = this.AddressCalculationSort(tempExpenditure);
-        int halfLength = d / 2 ;            
-        if(d % 2  == 0 ){ // even number count then take avarage 
-            tempMedian = ( (tempExpenditure[halfLength-1] * 1.0) + tempExpenditure[halfLength] ) / 2 ;            
-        }else{                // odd number count then take median
-            tempMedian = tempExpenditure[halfLength-1];
-        }
-        
-//         for(int i=0; i< d; i++)
-//            System.out.print(tempExpenditure[i] + " ");
-//        System.out.print( " -> " + tempMedian * 2  + " --> ");
-        
-        return tempMedian;         
-    }    
+    
     public int[] AddressCalculationSort(int[] expenditures){
         AddressCalculationSortNode[] frontNode = new AddressCalculationSortNode[10];        
         AddressCalculationSortNode newNode, currentNode;
@@ -139,20 +104,7 @@ public class Solution {
             number /= 10;
         }        
         return digit;
-    } 
-}
-
- class AddressCalculationSortNode {
-    public int nodeValue;
-    public AddressCalculationSortNode nextNode;
-    
-    public AddressCalculationSortNode(){        
-        this.nextNode = null;
     }
-    
-    public AddressCalculationSortNode(int newNodeValue){
-        this();
-        this.nodeValue = newNodeValue;
-    }
-}
 
+    
+}
