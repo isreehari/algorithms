@@ -8,6 +8,7 @@ package com.isreehari.hackerrank;
 import java.io.*;
 import java.util.*;
 import static java.util.Arrays.sort;
+import static java.util.Arrays.copyOf;
 import java.text.*;
 import java.math.*;
 import java.util.regex.*;
@@ -42,33 +43,17 @@ public class Solution {
     }
     
     static int findMedian(int[] expenditure, int initialIndex, int d){
-        int tempMedian = 0; 
-        
-        int[] tempExpenditure = new int[d];
-        for(int i=initialIndex,j = 0; j < d ; i++, j++){
-                 tempExpenditure[j] = expenditure[i];           
-        }
-        
-        
+        int tempMedian = 0;         
+        int[] tempExpenditure = Arrays.copyOfRange(expenditure,initialIndex, initialIndex+d);        
         sort(tempExpenditure); 
-        //tempExpenditure = selectionSort(tempExpenditure);
-        
-        int halfLength = d / 2 ; 
-           
+        int halfLength = d / 2 ;            
         if(d % 2  == 0 ){ // even number count then take avarage 
             tempMedian = ( tempExpenditure[halfLength] + tempExpenditure[halfLength+1] ) / 2 ;
         }else{                // odd number count then take median
             tempMedian = tempExpenditure[halfLength];
         }
         
-       /*  for(int i= 0; i < tempExpenditure.length; i++){
-            System.out.print(tempExpenditure[i] + " ");
-        }
-         System.out.print("--> " + tempMedian * 2 + " \n "); */
-                 
-        
-        return tempMedian; 
-        
+        return tempMedian;         
     }
     
     static int[] selectionSort(int[] tempExpenditure){
