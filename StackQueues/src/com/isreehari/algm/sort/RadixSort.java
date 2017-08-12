@@ -78,8 +78,7 @@ public class RadixSort {
         
         
         return expenditures;
-    }
-    
+    }    
     public int getNumberOfDigitsLargerstDigit(int[] expenditures){
         int numberDigits = 0;
         int largestDigit = 0;
@@ -94,8 +93,6 @@ public class RadixSort {
         }
         return numberDigits;
     }
-    
-    
     public int getDigit(int number, int k){
         int digit =0;
         for(int i=1; i<= k; i++){
