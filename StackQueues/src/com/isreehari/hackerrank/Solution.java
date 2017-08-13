@@ -21,6 +21,7 @@ import java.util.regex.*;
 public class Solution {    
     public ArrayList<Integer> tempExpenditure = new ArrayList<Integer>();     
     public ArrayList<Integer> sortedArray = new ArrayList<Integer>();
+    public RadixSortNode[] radixSortNodes = new RadixSortNode[201];
     public int[] cumulativeArray = new int[201];
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -58,28 +59,24 @@ public class Solution {
     public double findMedian(int[] expenditure, int initialIndex, int d){
         double tempMedian = 0.0;    
         int newNumber = 0, removeNumber= 0, tempSortedArrayIndex = 0;
-        
+        int significant = 0;  
         if(initialIndex == 0){                
             for(int i = initialIndex, j=0; i< initialIndex+d ; i++, j++){
                 this.tempExpenditure.add(expenditure[i]);            
-                this.cumulativeArray[expenditure[i]]++;                               
-            }
-            this.countingSort(this.tempExpenditure);
-                
-                 for(int h=0; h< this.sortedArray.size();h++)
-                    System.out.print(this.sortedArray.get(h) + " ");        
-                    System.out.println();
+                insertNodeRadixSort(expenditure[i]);
+            }                       
+            this.getSortedList();
         }else{
             newNumber = expenditure[initialIndex+d-1];
             removeNumber = this.tempExpenditure.remove(0);            
-            this.tempExpenditure.add(newNumber);               
-            tempSortedArrayIndex = this.sortedArray.indexOf(removeNumber);
-            this.sortedArray.remove(tempSortedArrayIndex);
-            this.sortedArray.add(newNumber);
-            sort(this.sortedArray);
+            this.tempExpenditure.add(newNumber);   
+            if( newNumber != removeNumber){
+                removeNodeRadixSort(removeNumber);                 
+                insertNodeRadixSort(newNumber);
+                this.getSortedList();                
+            }
+            
         }
-        
-       
         
         
         
@@ -88,8 +85,14 @@ public class Solution {
         if(d % 2  == 0 ){ // even number count then take avarage 
               tempMedian = ( (this.sortedArray.get(halfLength-1) * 1.0) + this.sortedArray.get(halfLength) ) / 2 ;                     
         }else{                // odd number count then take median            
-            tempMedian = this.sortedArray.get(halfLength-1);              
+            tempMedian = this.sortedArray.get(halfLength);              
         }
+        
+        for(int i =0; i < this.sortedArray.size(); i++){
+            System.out.print(this.sortedArray.get(i) + " ");
+        }
+        
+        System.out.println(" --> " + tempMedian);
 
         
         return tempMedian;         
@@ -113,7 +116,36 @@ public class Solution {
             tempCumulativeArray[significantDigit]--;            
         }                
        
-    }        
+    } 
+    
+    public void insertNodeRadixSort(int significant){                      
+        RadixSortNode newNode = new RadixSortNode(significant);
+        if(this.radixSortNodes[significant]== null){
+            radixSortNodes[significant] = newNode;
+        }else{
+            newNode.nextNode = radixSortNodes[significant];
+            radixSortNodes[significant] = newNode;
+        }
+    }
+    public void removeNodeRadixSort(int significant){                      
+       radixSortNodes[significant] = radixSortNodes[significant].nextNode;
+    }
+    
+    public void getSortedList(){        
+         RadixSortNode currentNode;
+         
+         sortedArray.removeAll(sortedArray);
+         
+         //ArrayList<Integer> tempSortedArray = new ArrayList<Integer>();
+         for(int i=0; i<= 200; i++){
+             currentNode = this.radixSortNodes[i];
+             while(currentNode != null){
+                    sortedArray.add(currentNode.nodeValue);
+                    currentNode = currentNode.nextNode;
+             }
+         }        
+    }
+    
     public void insertNewValue(int newValue){        
         int previousValue, insertIndex = -1;
         for(int tempIndex=0; tempIndex< tempExpenditure.size(); tempIndex++){
@@ -135,4 +167,19 @@ public class Solution {
         }
         
     }
+}
+
+class RadixSortNode {
+    public int nodeValue;
+    public RadixSortNode nextNode;
+    
+    public RadixSortNode(){        
+        this.nextNode = null;
+    }
+    
+    public RadixSortNode(int newNodeValue){
+        this();
+        this.nodeValue = newNodeValue;
+    }
+    
 }
