@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.*;
 import java.text.*;
 import java.math.*;
-import static java.util.Collections.sort;
 import java.util.regex.*;
 
 /**
@@ -19,8 +18,8 @@ import java.util.regex.*;
 
 
 public class Solution {            
-    public RadixSortNode[] frontNodes = new RadixSortNode[201];    
-    
+    public RadixSortNode[] frontNodes = new RadixSortNode[201]; 
+    public int largestNumber = 0;    
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -39,7 +38,11 @@ public class Solution {
           
         
         for(int expenditure_i = 0; expenditure_i < n; expenditure_i++){
-            expenditure[expenditure_i] = in.nextInt();  
+            expenditure[expenditure_i] = in.nextInt(); 
+            
+             if(expenditure[expenditure_i] > thisSolution.largestNumber)
+                 thisSolution.largestNumber = expenditure[expenditure_i];
+            
             if(expenditure_i < d){                
                 thisSolution.insertNodeRadixSort(expenditure[expenditure_i]);
             } else{
@@ -82,14 +85,14 @@ public class Solution {
          int evenNumberCase1 = 0 , evenNumberCase2 = 0;
          int currentIndex = 0;
          boolean evenNumber = d % 2 == 0 ? true : false;
-         for(int i=0; i<= 200; i++){          
+         for(int i=0; i<= this.largestNumber; i++){          
              currentNode = this.frontNodes[i];
              while(currentNode != null){
                  if(currentIndex == halfLength){                      
                      if(evenNumber){
                          evenNumberCase1 = currentNode.nodeValue;                          
                          if(currentNode.nextNode == null){
-                              for(int j = i+1; j<= 200; j++){
+                              for(int j = i+1; j<= this.largestNumber; j++){
                                 currentNode = this.frontNodes[j];
                                 if(currentNode != null){
                                    evenNumberCase2 = currentNode.nodeValue;
@@ -102,7 +105,7 @@ public class Solution {
                          return tempMedian;
                      }else{
                           if(currentNode.nextNode == null){
-                              for(int j = i+1; j<= 200; j++){
+                              for(int j = i+1; j<= this.largestNumber; j++){
                                 currentNode = this.frontNodes[j];
                                 if(currentNode != null){
                                    return tempMedian = currentNode.nodeValue;
