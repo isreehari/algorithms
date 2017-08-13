@@ -18,10 +18,8 @@ import java.util.regex.*;
  */
 
 
-public class Solution {    
-    public ArrayList<Integer> tempExpenditure = new ArrayList<Integer>();         
-    public RadixSortNode[] frontNodes = new RadixSortNode[201];
-    public RadixSortNode[] rearNodes = new RadixSortNode[201];    
+public class Solution {            
+    public RadixSortNode[] frontNodes = new RadixSortNode[201];    
     
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -29,97 +27,98 @@ public class Solution {
         int d = in.nextInt();
         int[] expenditure = new int[n];
         Solution thisSolution = new Solution();
-        for(int expenditure_i = 0; expenditure_i < n; expenditure_i++){
-            expenditure[expenditure_i] = in.nextInt();  
-            if(expenditure_i < d){
-                thisSolution.tempExpenditure.add(expenditure[expenditure_i]);
-                thisSolution.insertNodeRadixSort(expenditure[expenditure_i]);
-            }
-        }
         
-        int result = thisSolution.activityNotifications(expenditure,n, d);
-        System.out.println(result);
-        in.close();
-    }
-    public int activityNotifications(int[] expenditure,int n, int d) {
-        // Complete this function
-            if(expenditure.length < 0 || d >= expenditure.length){
-                 return 0;
+         if(expenditure.length < 0 || d >= expenditure.length){
+                 in.close();
+                 System.out.println(0);
+                 return;
              }  
           int newNumber = 0, removeNumber= 0; 
           double median = 0.0;          
           int numberNotifications = 0;
           
-          for(int i = d; i< n; i++){       
+        
+        for(int expenditure_i = 0; expenditure_i < n; expenditure_i++){
+            expenditure[expenditure_i] = in.nextInt();  
+            if(expenditure_i < d){                
+                thisSolution.insertNodeRadixSort(expenditure[expenditure_i]);
+            } else{
+                median = thisSolution.getMedian(d);    
               
-              median = this.getMedian(d);    
-              
-              if(expenditure[i] >= (median * 2)){                    
-                  numberNotifications++;
-                }
-              
-              newNumber = expenditure[i];
-              removeNumber = this.tempExpenditure.remove(0);            
-              this.tempExpenditure.add(newNumber);  
-              
-              if( newNumber != removeNumber){
-                this.removeNodeRadixSort(removeNumber);                 
-                this.insertNodeRadixSort(newNumber);                     
-              }                
-              
-              
-          }
-              
-          return numberNotifications;     
-    }                 
+                if(expenditure[expenditure_i] >= (median * 2)){                    
+                    numberNotifications++;
+                  }
+
+                newNumber = expenditure[expenditure_i];
+                removeNumber = expenditure[expenditure_i-d];
+
+                if( newNumber != removeNumber){
+                  thisSolution.removeNodeRadixSort(removeNumber);                 
+                  thisSolution.insertNodeRadixSort(newNumber);                     
+                }                
+            }
+        }
+        System.out.println(numberNotifications);
+        in.close();
+    }    
     public void insertNodeRadixSort(int significant){                      
         RadixSortNode newNode = new RadixSortNode(significant);
         if(this.frontNodes[significant]== null){
             this.frontNodes[significant] = newNode;            
         }else{
-            this.rearNodes[significant].nextNode = newNode;           
+            newNode.nextNode = this.frontNodes[significant];
+            this.frontNodes[significant] = newNode;
         }
-        this.rearNodes[significant] = newNode;
+        
         
     }
     public void removeNodeRadixSort(int significant){                      
-       this.frontNodes[significant] = this.frontNodes[significant].nextNode;
-        if(this.frontNodes[significant] == null)
-            this.rearNodes[significant] = null;
+       this.frontNodes[significant] = this.frontNodes[significant].nextNode;        
     }    
     public double getMedian(int d){        
-         RadixSortNode frontNode = null, rearNode = null, currentNode = null;
+         RadixSortNode currentNode = null;
          double tempMedian = 0.0;        
          int halfLength = (d / 2) - 1;    
          int evenNumberCase1 = 0 , evenNumberCase2 = 0;
          int currentIndex = 0;
-         for(int i=0; i<= 200; i++){             
-             if(this.rearNodes[i] != null){
-                    if(frontNode == null)
-                        frontNode = this.frontNodes[i];
-                    else{
-                        rearNode.nextNode = this.frontNodes[i];
-                    }                    
-                    rearNode = this.rearNodes[i];
-             }
-         }             
-
-         currentNode = frontNode;
-         while(currentNode != null){
-                 if(currentIndex == halfLength){                        
-                     if(d % 2  == 0 ){
-                         evenNumberCase1 = currentNode.nodeValue; 
-                         evenNumberCase2 = currentNode.nextNode.nodeValue;
+         boolean evenNumber = d % 2 == 0 ? true : false;
+         for(int i=0; i<= 200; i++){          
+             currentNode = this.frontNodes[i];
+             while(currentNode != null){
+                 if(currentIndex == halfLength){                      
+                     if(evenNumber){
+                         evenNumberCase1 = currentNode.nodeValue;                          
+                         if(currentNode.nextNode == null){
+                              for(int j = i+1; j<= 200; j++){
+                                currentNode = this.frontNodes[j];
+                                if(currentNode != null){
+                                   evenNumberCase2 = currentNode.nodeValue;
+                                   break;
+                                }    
+                              }
+                          }else
+                            evenNumberCase2 = currentNode.nextNode.nodeValue;
                          tempMedian = (evenNumberCase1*1.0 + evenNumberCase2)/2;
+                         return tempMedian;
                      }else{
-                         tempMedian = currentNode.nextNode.nodeValue;
+                          if(currentNode.nextNode == null){
+                              for(int j = i+1; j<= 200; j++){
+                                currentNode = this.frontNodes[j];
+                                if(currentNode != null){
+                                   return tempMedian = currentNode.nodeValue;
+                                   
+                                }    
+                              }
+                          }else
+                            return tempMedian = currentNode.nextNode.nodeValue;
                      }
                      break;
                  }
-                currentNode = currentNode.nextNode;
-                currentIndex++;
-            }
-         
+                 currentIndex++;
+                 currentNode = currentNode.nextNode;
+             }             
+
+         }             
          return tempMedian;
     }        
 }
