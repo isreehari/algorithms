@@ -18,6 +18,9 @@ public class MainClass {
             System.out.println("******************* Binary Tree *******************");
             System.out.println("*1. Build New Binary Tree                         *");
             System.out.println("*2. Display Binary Tree                           *");
+            System.out.println("*3. Pre Order Travers                             *");
+            System.out.println("*4. In Order Travers                              *");
+            System.out.println("*5. Post Order Travers                            *");
             System.out.println("*0. Quit the App                                  *");
             System.out.println("******************* /Binary Tree ******************");
             System.out.print("Please enter your choice: ");
@@ -25,6 +28,9 @@ public class MainClass {
             switch(userChoice){
                 case 1: mainBinaryTree.build(inputScanner); break;
                 case 2: mainBinaryTree.display(); break;
+                case 3: mainBinaryTree.preOrder();break;
+                case 4: mainBinaryTree.inOrder(); break;
+                case 5: mainBinaryTree.postOrder(); break;
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Your choice is wrong."); break;
             }

@@ -109,6 +109,59 @@ public class BinaryTree {
         
     }
     
+    public void preOrder(){
+        if(this.rootNode != null){
+            this.traversPreOrder(this.rootNode);
+            System.out.println();
+        }
+            
+    }
+    
+    private void traversPreOrder(BinaryTreeCharNode currentNode){
+         if(currentNode == null)
+             return;
+         
+         System.out.print(currentNode.nodeValue);
+         this.traversPreOrder(currentNode.leftChildNode);
+         this.traversPreOrder(currentNode.rightChildNode);
+    }
+    
+    
+    public void postOrder(){
+        if(this.rootNode != null){
+            this.traversPostOrder(this.rootNode);
+            System.out.println();
+        }
+            
+    }
+    
+     private void traversPostOrder(BinaryTreeCharNode currentNode){
+         if(currentNode == null)
+             return;
+         
+         this.traversPreOrder(currentNode.leftChildNode);
+         this.traversPreOrder(currentNode.rightChildNode);
+         System.out.print(currentNode.nodeValue);
+    }
+     
+     
+      public void inOrder(){
+        if(this.rootNode != null){
+            this.traversPostOrder(this.rootNode);
+            System.out.println();
+        }
+            
+    }
+    
+     private void traversInOrder(BinaryTreeCharNode currentNode){
+         if(currentNode == null)
+             return;
+         
+         this.traversPreOrder(currentNode.leftChildNode);
+         System.out.print(currentNode.nodeValue);
+         this.traversPreOrder(currentNode.rightChildNode);
+    }
+    
     
     
     
