@@ -16,25 +16,56 @@ public class ThePowerSum {
         int givenNumber = inputScanner.nextInt();
         int nThPower = inputScanner.nextInt();        
         int initial = 1;
+        int maximum = 1;
         
         ThePowerSum  thePowerSum = new ThePowerSum();
-        thePowerSum.getPowerSum(initial, nThPower, givenNumber);            
         
-        System.out.println(thePowerSum.count);        
+        while(thePowerSum.getNThPower(maximum, nThPower) <= givenNumber)
+            maximum++;
+        
+        if(maximum > 1)
+            maximum--;        
+        
+        System.out.println(thePowerSum.getPowerSum(givenNumber, nThPower, 1));            
         inputScanner.close();
     }
     
     
-    public int getPowerSum(int initial, int nThPower, int givenNumber){
+    public int getPowerSum(int total, int nThPower, int initialNumber){
         
-        int sum = (this.getNThPower(initial,nThPower) + this.getNThPower(initial+1, nThPower));            
-        if( sum > givenNumber ) // Base case sum > givenNumber return
-           return 0;
+//        int a = this.getNThPower(initial,nThPower);
+//        int b = this.getNThPower(secondValue,nThPower);            
+//        int sum = a + b;
+//        
+//        System.out.println(initial + " + " +(secondValue) + " = " + sum);    
+//        
+//        if( sum > givenNumber ) // Base case sum > givenNumber return
+//           return 0;
+//        
+//        if( sum == givenNumber){
+//            this.count++;
+//            return 0;
+//        }
+//        
+//        if( secondValue == maximum){
+//            initial = initial + 1;
+//            secondValue = initial;
+//        }
+
+//        if(initial > maximum)
+//            return 0;
+//
+//        int sum =  0  ;
+//        
+//        System.out.println(initial + " --> " + (initial + this.getPowerSum(initial+1,maximum, nThPower, givenNumber)));
+//          
+//        return sum;
+        int value = (total - this.getNThPower(initialNumber, nThPower));
         
-        if( sum == givenNumber)
-           this.count++;
-          
-        return this.getPowerSum(initial+1,nThPower, givenNumber) + this.getPowerSum(initial+2,nThPower, givenNumber);
+        if(value < 0 ) return 0;
+        else if( value == 0) return 1;
+        else return this.getPowerSum(value, nThPower, initialNumber+1) + this.getPowerSum(total,nThPower, initialNumber+1);
+
     }
     
     
