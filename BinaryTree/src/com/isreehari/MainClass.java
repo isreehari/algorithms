@@ -21,6 +21,8 @@ public class MainClass {
             System.out.println("*3. Pre Order Travers                             *");
             System.out.println("*4. In Order Travers                              *");
             System.out.println("*5. Post Order Travers                            *");
+            System.out.println("*6. Level Order Travers                           *");
+            System.out.println("*7. Height of Binary Tree                         *");
             System.out.println("*0. Quit the App                                  *");
             System.out.println("******************* /Binary Tree ******************");
             System.out.print("Please enter your choice: ");
@@ -31,6 +33,8 @@ public class MainClass {
                 case 3: mainBinaryTree.preOrder();break;
                 case 4: mainBinaryTree.inOrder(); break;
                 case 5: mainBinaryTree.postOrder(); break;
+                case 6: mainBinaryTree.levelOrder(); break;
+                case 7: mainBinaryTree.height(); break;
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Your choice is wrong."); break;
             }
