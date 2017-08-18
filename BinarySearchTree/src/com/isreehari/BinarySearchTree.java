@@ -29,13 +29,15 @@ public class BinarySearchTree {
             System.out.println("******************* Binary Search Tree *******************");
             System.out.println("*1. Build New Binary Search Tree                         *");
             System.out.println("*2. Display Binary Search Tree                           *");
-            System.out.println("*3. Pre Order Travers                             *");
-            System.out.println("*4. In Order Travers                              *");
-            System.out.println("*5. Post Order Travers                            *");
-            System.out.println("*6. Level Order Travers                           *");
+            System.out.println("*3. Pre Order Travers                                    *");
+            System.out.println("*4. In Order Travers                                     *");
+            System.out.println("*5. Post Order Travers                                   *");
+            System.out.println("*6. Level Order Travers                                  *");
             System.out.println("*7. Height of Binary Search Tree                         *");
-            System.out.println("*8. Search a element in Binary Search Tree        *");
-            System.out.println("*0. Quit the App                                  *");
+            System.out.println("*8. Search a element in Binary Search Tree               *");
+            System.out.println("*9. Search a minimum element in Binary Search Tree       *");
+            System.out.println("*10. Search a Maximum element in Binary Search Tree      *");
+            System.out.println("*0. Quit the App                                         *");
             System.out.println("******************* /Binary Search Tree ******************");
             System.out.print("Please enter your choice: ");
             userChoice = inputScanner.nextInt();
@@ -47,7 +49,9 @@ public class BinarySearchTree {
                 case 5: binarySearchTree.postOrder(); break;
                 case 6: binarySearchTree.levelOrder(); break;
                 case 7: binarySearchTree.height(); break;
-                case 8: binarySearchTree.search(inputScanner); break;                
+                case 8: binarySearchTree.search(inputScanner); break;       
+                case 9: binarySearchTree.getMimimumValue(binarySearchTree.rootNode); break;       
+                case 10: binarySearchTree.getMaximumValue(binarySearchTree.rootNode); break;       
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Your choice is wrong."); break;
             }
@@ -224,8 +228,7 @@ public class BinarySearchTree {
              this.findElement( this.rootNode, inputScanner.nextInt());
          }
              
-     }
-     
+     }     
      private void findElement(BinarySearchTreeNode currentNode, int searchValue){
           if(currentNode == null){
               System.out.println("Opps! Element is not found in the Binary Search Tree");
@@ -243,4 +246,81 @@ public class BinarySearchTree {
               
           
      }
+     public void getMimimumValue(BinarySearchTreeNode currentNode){
+         
+         if(currentNode == null){
+            System.out.println("Opps! Element is not found in the Binary Search Tree");
+            return;
+         }
+         
+          if(currentNode.leftChildNode == null){
+              System.out.println( currentNode.nodeValue +  " Element is maximum value int the Binary Search Tree");
+          }else
+              this.getMaximumValue(currentNode.leftChildNode);
+     }     
+     public void getMaximumValue(BinarySearchTreeNode currentNode){
+          
+          if(currentNode == null){
+            System.out.println("Opps! Element is not found in the Binary Search Tree");
+            return;            
+         }
+          
+          
+          if(currentNode.rightChildNode == null){
+              System.out.println( currentNode.nodeValue +  " Element is maximum value int the Binary Search Tree");
+          }else
+              this.getMaximumValue(currentNode.rightChildNode);
+              
+          
+     }     
+     public void delete(Scanner inputScanner){
+      if(this.rootNode == null){
+             System.out.println("Opps! Tree is empty");
+         }else{
+             System.out.print("Please enter search value: ");
+             this.deleteNode(null, this.rootNode, inputScanner.nextInt());
+         }    
+     }     
+     private void deleteNode(BinarySearchTreeNode parentNode, BinarySearchTreeNode currentNode, int deleteNode){
+         
+         if(currentNode == null){
+              System.out.println("Opps! Element is not found in the Binary Search Tree");
+              return;
+          }
+          
+          
+          if(currentNode.nodeValue > deleteNode){
+              parentNode = currentNode;
+              this.deleteNode(parentNode, currentNode.leftChildNode, deleteNode);
+          }else if(currentNode.nodeValue < deleteNode){
+              parentNode = currentNode;
+              this.deleteNode(parentNode, currentNode.rightChildNode, deleteNode);
+          }else if(currentNode.nodeValue == deleteNode){
+              
+              //parentNode = currentNode;
+              
+              if(currentNode.leftChildNode == null && currentNode.rightChildNode == null){
+                  if(parentNode.leftChildNode == currentNode){
+                      parentNode.leftChildNode = null;
+                  }else if( parentNode.rightChildNode == currentNode){
+                      parentNode.rightChildNode = null;
+                  }                  
+                  else
+                      parentNode = null;
+              }else if(currentNode.leftChildNode != null && currentNode.rightChildNode != null){
+                  parentNode.rightChildNode = currentNode.rightChildNode;
+              }else if(currentNode.leftChildNode !=  null){
+                  parentNode = currentNode.rightChildNode;
+              }
+              
+              
+              
+              
+          }
+         
+         
+     }
+     
+     
+     
 }
