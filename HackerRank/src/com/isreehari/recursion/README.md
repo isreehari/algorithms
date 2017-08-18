@@ -29,7 +29,7 @@ The first line contains two space separated integers, n and k.
 **Constraints**
 
 ```Java
-1 <= n < 10^100000 super_digit
+1 <= n < 10^100000
 1 <= k < 10^5
 ```
 
