@@ -12,40 +12,46 @@ import java.util.Scanner;
 public class RecursiveDigitSum {
     public static void main(String[] args){
         Scanner inputScanner = new Scanner(System.in);        
-        Long givenNumber = inputScanner.nextLong();
-        int kTimes = inputScanner.nextInt();  
-       // int tempTimes = kTimes;
-        //String composedStr = new String();        
-        RecursiveDigitSum recursiveDigitSum = new RecursiveDigitSum();        
-        System.out.println(recursiveDigitSum.getSuerDigit(kTimes,0, givenNumber));
+        String givenNumber = inputScanner.next();
+        int kTimes = inputScanner.nextInt();         
         
+        RecursiveDigitSum recursiveDigitSum = new RecursiveDigitSum();        
+        int firstSetSuperDigit = recursiveDigitSum.getSuerDigitFirstSet(0, givenNumber);
+        System.out.println(recursiveDigitSum.getSuerDigit( 0, firstSetSuperDigit*kTimes));
         inputScanner.close();
     }
     
-    public int getSuerDigit(int kTimes, int sum, Long givenNumber){         
+    public int getSuerDigitFirstSet(int sum, String givenNumber){
+        int givenNumberLength = givenNumber.length();
+           if(givenNumberLength == 0){
+               if((sum / 10) > 0){
+                   givenNumber =  String.valueOf(sum);
+                   sum = 0;
+               }else{
+                   return sum;
+               }
+           }else{
+               sum += Character.getNumericValue(givenNumber.charAt(givenNumberLength-1));
+               givenNumber = givenNumber.substring(0, givenNumberLength-1);
+           }
+           
+        return this.getSuerDigitFirstSet(sum, givenNumber);
+    }
+    
+    public int getSuerDigit(int sum, int givenNumber){         
            if(givenNumber == 0){
                    if(sum / 10 > 0){
-                       givenNumber = (long)sum;
+                       givenNumber = sum;
                        sum = 0;
                    }else{
-                       if(kTimes == 0){
-                           return sum;
-                       }else{
-                           sum *= kTimes;
-                            if(sum / 10 > 0)
-                            {
-                                givenNumber = (long) sum;
-                                sum = 0;
-                                kTimes = 0;
-                            }else
-                            return sum;
-                       }
-                       
+                       return sum;
                    }
            }else{
                sum += givenNumber % 10;
            }
            
-        return this.getSuerDigit(kTimes, sum, givenNumber/10);
+        return this.getSuerDigit(sum, givenNumber/10);
     }
+    
+    
 }
