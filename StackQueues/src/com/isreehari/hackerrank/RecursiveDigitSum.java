@@ -12,35 +12,40 @@ import java.util.Scanner;
 public class RecursiveDigitSum {
     public static void main(String[] args){
         Scanner inputScanner = new Scanner(System.in);        
-        String givenNumber = inputScanner.next();
+        Long givenNumber = inputScanner.nextLong();
         int kTimes = inputScanner.nextInt();  
-        int tempTimes = kTimes;
-        String composedStr = new String();
-        while(kTimes > 0){
-            composedStr  += givenNumber;
-            kTimes--;
-        }
-        
+       // int tempTimes = kTimes;
+        //String composedStr = new String();        
         RecursiveDigitSum recursiveDigitSum = new RecursiveDigitSum();        
-        System.out.println(recursiveDigitSum.getSuerDigit(0, composedStr));
+        System.out.println(recursiveDigitSum.getSuerDigit(kTimes,0, givenNumber));
         
         inputScanner.close();
     }
     
-    public int getSuerDigit(int sum, String givenNumber){
-        int givenNumberLength = givenNumber.length();
-           if(givenNumberLength == 0){
-               if((sum / 10) > 0){
-                   givenNumber =  String.valueOf(sum);
-                   sum = 0;
-               }else{
-                   return sum;
-               }
+    public int getSuerDigit(int kTimes, int sum, Long givenNumber){         
+           if(givenNumber == 0){
+                   if(sum / 10 > 0){
+                       givenNumber = (long)sum;
+                       sum = 0;
+                   }else{
+                       if(kTimes == 0){
+                           return sum;
+                       }else{
+                           sum *= kTimes;
+                            if(sum / 10 > 0)
+                            {
+                                givenNumber = (long) sum;
+                                sum = 0;
+                                kTimes = 0;
+                            }else
+                            return sum;
+                       }
+                       
+                   }
            }else{
-               sum += Character.getNumericValue(givenNumber.charAt(givenNumberLength-1));
-               givenNumber = givenNumber.substring(0, givenNumberLength-1);
+               sum += givenNumber % 10;
            }
            
-        return this.getSuerDigit(sum, givenNumber);
+        return this.getSuerDigit(kTimes, sum, givenNumber/10);
     }
 }
