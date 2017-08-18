@@ -1,3 +1,4 @@
+#Recursive Digit Sum
 We define super digit of an integer  using the following rules:
 
 If  has only  digit, then its super digit is .
