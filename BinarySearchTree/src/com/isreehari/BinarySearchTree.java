@@ -316,18 +316,18 @@ public class BinarySearchTree {
                      
               }else if(currentNode.leftChildNode != null && currentNode.rightChildNode != null){ // Case C: If the node has to child nodes
                        
-                        BinarySearchTreeNode inOrderSuccerNode = null, inOrderSuccerNodeParent = null;
-                        inOrderSuccerNode = currentNode.rightChildNode;
+                        BinarySearchTreeNode inOrderSuccessorNode = null, inOrderSuccessorNodeParent = null;
+                        inOrderSuccessorNode = currentNode.rightChildNode;
 
-                        while(inOrderSuccerNode.leftChildNode != null){
-                            inOrderSuccerNodeParent = inOrderSuccerNode;
-                            inOrderSuccerNode = inOrderSuccerNode.leftChildNode;
+                        while(inOrderSuccessorNode.leftChildNode != null){
+                            inOrderSuccessorNodeParent = inOrderSuccessorNode;
+                            inOrderSuccessorNode = inOrderSuccessorNode.leftChildNode;
                         }                  
-                        currentNode.nodeValue = inOrderSuccerNode.nodeValue;   
-                        if(inOrderSuccerNodeParent == null)
+                        currentNode.nodeValue = inOrderSuccessorNode.nodeValue;   
+                        if(inOrderSuccessorNodeParent == null)
                             currentNode.rightChildNode = null;
                         else
-                            this.deleteNode(inOrderSuccerNodeParent, inOrderSuccerNode, inOrderSuccerNode.nodeValue);
+                            this.deleteNode(inOrderSuccessorNodeParent, inOrderSuccessorNode, inOrderSuccessorNode.nodeValue);
                   
               }else{ // case B: If the node has only one child node
                   
