@@ -37,6 +37,7 @@ public class BinarySearchTree {
             System.out.println("*8. Search a element in Binary Search Tree               *");
             System.out.println("*9. Search a minimum element in Binary Search Tree       *");
             System.out.println("*10. Search a Maximum element in Binary Search Tree      *");
+            System.out.println("*11. Delete element in Binary Search Tree                *");
             System.out.println("*0. Quit the App                                         *");
             System.out.println("******************* /Binary Search Tree ******************");
             System.out.print("Please enter your choice: ");
@@ -51,7 +52,8 @@ public class BinarySearchTree {
                 case 7: binarySearchTree.height(); break;
                 case 8: binarySearchTree.search(inputScanner); break;       
                 case 9: binarySearchTree.getMimimumValue(binarySearchTree.rootNode); break;       
-                case 10: binarySearchTree.getMaximumValue(binarySearchTree.rootNode); break;       
+                case 10: binarySearchTree.getMaximumValue(binarySearchTree.rootNode); break;  
+                case 11: binarySearchTree.delete(inputScanner); break;  
                 case 0: inputScanner.close(); System.exit(0); break;
                 default: System.out.println("Your choice is wrong."); break;
             }
@@ -298,19 +300,48 @@ public class BinarySearchTree {
           }else if(currentNode.nodeValue == deleteNode){
               
               //parentNode = currentNode;
-              
-              if(currentNode.leftChildNode == null && currentNode.rightChildNode == null){
-                  if(parentNode.leftChildNode == currentNode){
-                      parentNode.leftChildNode = null;
-                  }else if( parentNode.rightChildNode == currentNode){
-                      parentNode.rightChildNode = null;
-                  }                  
-                  else
-                      parentNode = null;
-              }else if(currentNode.leftChildNode != null && currentNode.rightChildNode != null){
-                  parentNode.rightChildNode = currentNode.rightChildNode;
-              }else if(currentNode.leftChildNode !=  null){
-                  parentNode = currentNode.rightChildNode;
+              // Case A : If the node does not have child nodes
+              if(currentNode.leftChildNode == null && currentNode.rightChildNode == null){   
+                  
+                      if(parentNode == null){
+                          this.rootNode = null;
+                      }else{
+                             if(parentNode.leftChildNode == currentNode)
+                                    parentNode.leftChildNode  = null;
+                                else
+                                    parentNode.rightChildNode = null;
+                      }
+                  
+                  
+                     
+              }else if(currentNode.leftChildNode != null && currentNode.rightChildNode != null){ // Case C: If the node has to child nodes
+                       
+                        BinarySearchTreeNode inOrderSuccerNode = null, inOrderSuccerNodeParent = null;
+                        inOrderSuccerNode = currentNode.rightChildNode;
+
+                        while(inOrderSuccerNode.leftChildNode != null){
+                            inOrderSuccerNodeParent = inOrderSuccerNode;
+                            inOrderSuccerNode = inOrderSuccerNode.leftChildNode;
+                        }                  
+                        currentNode.nodeValue = inOrderSuccerNode.nodeValue;   
+                        if(inOrderSuccerNodeParent == null)
+                            currentNode.rightChildNode = null;
+                        else
+                            this.deleteNode(inOrderSuccerNodeParent, inOrderSuccerNode, inOrderSuccerNode.nodeValue);
+                  
+              }else{ // case B: If the node has only one child node
+                  
+                  if(parentNode == null){
+                      if(currentNode.leftChildNode == null)
+                          this.rootNode = currentNode.rightChildNode;
+                          else
+                          this.rootNode = currentNode.leftChildNode;
+                      }else{                  
+                        if(currentNode.leftChildNode == null)
+                            parentNode.rightChildNode  = currentNode.rightChildNode;
+                        else
+                            parentNode.leftChildNode  = currentNode.leftChildNode;
+                  }
               }
               
               
