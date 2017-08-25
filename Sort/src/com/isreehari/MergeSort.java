@@ -16,6 +16,8 @@ public class MergeSort {
     public static void main(String[] args){
         Scanner inputScanner = new Scanner(System.in);
         MergeSort mergeSort = new MergeSort();
+        
+        
         int arraySize1 = inputScanner.nextInt();
         int[] givenArray1 = new int[arraySize1];
         int[] tempArray1 = new int[arraySize1];
@@ -23,7 +25,7 @@ public class MergeSort {
             givenArray1[index] = inputScanner.nextInt();
         }
         
-        givenArray1 = mergeSort.doMergeSort(givenArray1,givenArray1, 0, arraySize1-1);
+        givenArray1 = mergeSort.doMergeSort(givenArray1,tempArray1, 0, arraySize1-1);
         for(int index = 0; index < arraySize1; index++){
             System.out.print(givenArray1[index] + " ");
         }
@@ -42,16 +44,18 @@ public class MergeSort {
         int mid = (low + up) / 2;
         
         this.doMergeSort(givenArray1,tempArray1,low,mid);
-        this.doMergeSort(givenArray1,tempArray1,mid+1,up);
+        this.doMergeSort(givenArray1,tempArray1,mid+1,up);        
+        tempArray1 =  this.doMerge(givenArray1, tempArray1, low, mid, mid+1,up);
         
-        givenArray1 =  this.doMerge(givenArray1, tempArray1, low, mid, mid+1,up);
+        for(int i = low; i <= up; i++)
+            givenArray1[i] = tempArray1[i];
         
         return givenArray1;
     }
     
       public int[] doMerge(int temp1[], int[] temp2, int low1, int up1, int low2, int up2){
         
-        int i = low1, j = low2, currentIndex = 0;
+        int i = low1, j = low2, currentIndex = low1;
         
            while(i <= up1 && j <= up2 ){
                 if(temp1[i] > temp1[j]){
