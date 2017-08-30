@@ -6,6 +6,8 @@
 package com.isreehari.contest47;
 
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.Iterator;
 import java.math.*;
 
 /**
@@ -13,19 +15,21 @@ import java.math.*;
  * @author sinukoll
  */
 public class PathSumIV {
-    
+    public Stack<Integer> currentStack = new Stack<Integer>();
+    public int totalSum = 0;
     public int pathSum(int[] nums) {
-        int[] tempNums = new int[nums.length];
-       // nums = this.mergeSort(nums,tempNums,0,nums.length-1);
+        //int[] tempNums = new int[nums.length];
+        //nums = this.mergeSort(nums,tempNums,0,nums.length-1);
         int significant1,significant2,significant3;
         significant1 =significant2 =significant3 = 0;     
         int newValue = 0;
-        int newNodeIndex = 0;
-        int numberNodes = 0;
+       
+        int[] treeArray = new int[17];
+        int treeIndex = 0;
         
-        int[][] bTreeArray = new int[4][8];
-        
-        BinaryTreeNode rootNode = null, newNode = null;
+        for(int index = 1; index< treeArray.length; index++){
+            treeArray[index] = -1;
+        }
         
         
         for(int index =0; index< nums.length; index++){
@@ -35,23 +39,53 @@ public class PathSumIV {
             significant2 = newValue % 10; // 2 - 12
             newValue = newValue / 10;            
             significant3 = newValue % 10; // 1 - 1            
-            bTreeArray[significant3-1][significant2-1] = significant1;            
-        }
-        
-        int totalSum = 0;
-        
-        for(int i = 0; i< 4; i++){
-            numberNodes = (int)Math.pow(2,i);
-            for(int j = 0; j< numberNodes; j++)
-            System.out.print(bTreeArray[i][j] +" ");
             
-            System.out.println();
+            treeIndex = ((int)Math.pow(2,(significant3-1)) + (significant2)) - 1 ;
+            
+            treeArray[treeIndex] = significant1;
+            
         }
+        
+            for(int index = 1; index< treeArray.length; index++){
+                System.out.println( index + " --> " +treeArray[index] + " ");
+             }
+            
+            
+           
          
         
         
+        this.getPathSumInOrder(treeArray, 1);
+        return this.totalSum;
+    }
+    
+    public void getPathSumInOrder(int[] nums, int rootIndex){
+     
+        int leftChildIndex = 2 * rootIndex ;
+        int rightChildIndex = leftChildIndex + 1;
         
-        return 0;
+        if( rightChildIndex > nums.length || nums[rootIndex] == -1 )
+            return;
+        
+       
+        
+        this.currentStack.push(rootIndex);
+        this.getPathSumInOrder(nums, leftChildIndex);
+        int newIndex = 0;
+        if( rightChildIndex < nums.length )            
+         if(nums[leftChildIndex] == -1 && nums[rightChildIndex] == -1){
+             Iterator<Integer> stackNode = this.currentStack.iterator();
+             while(stackNode.hasNext()){
+                 newIndex = stackNode.next();
+                 this.totalSum = this.totalSum + nums[newIndex];
+             }
+             this.currentStack.pop();
+         }
+             
+        this.getPathSumInOrder(nums, rightChildIndex);
+            
+        
+       
     }
     
     public int[] mergeSort(int[] nums, int[] tempNums, int low, int up){
