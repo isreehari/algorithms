@@ -172,12 +172,103 @@ public class AVLTreeDemo1 {
     
     
      public AVLNode insertionLeftBalance(AVLNode currentNode){    
+         
+         
+         AVLNode a, b;
+         
+         a = currentNode.leftChild;
+         
+         if(a.balanceFactor == 1){  // Case L_3A : Insertion in AL
+             currentNode.balanceFactor = 0;
+             a.balanceFactor = 0;
+             currentNode = this.rotateRight(currentNode);
+         }
+         else{
+              b = a.rightChild;
+              
+              switch(b.balanceFactor){ 
+                  case 1: // Case L_3B2: Insertion in BL                      
+                            currentNode.balanceFactor = -1 ;
+                            a.balanceFactor = 0;
+                            break;
+                  case -1: // Case L_3B2 : Insertion in BR
+                           currentNode.balanceFactor = 0;
+                           a.balanceFactor = 1; 
+                           break;
+                  case 0:  // Case L_3B2: B is the newly inserted node                      
+                           currentNode.balanceFactor = 0;
+                           a.balanceFactor = 0; 
+                           break;
+              }
+              
+              b.balanceFactor = 0;
+              currentNode.leftChild = this.rotateLeft(a);
+              currentNode = this.rotateRight(currentNode);
+              
+         }
+         
+         
+         
+         
+         
         return currentNode;
     }
      
       public AVLNode insertionRightBalance(AVLNode currentNode){    
+        
+           AVLNode a, b;
+         
+         a = currentNode.rightChild;
+         
+         if(a.balanceFactor == -1){  // Case R_3A : Insertion in AR
+             currentNode.balanceFactor = 0;
+             a.balanceFactor = 0;
+             currentNode = this.rotateLeft(currentNode);
+         }
+         else{   // Case R_3B : Insertion in AL
+              b = a.leftChild;
+              
+              switch(b.balanceFactor){ 
+                  case -1: //  Insertion in BR                      
+                            currentNode.balanceFactor = 1 ;
+                            a.balanceFactor = 0;
+                            break;
+                  case 1: // Insertion in BL
+                           currentNode.balanceFactor = 0;
+                           a.balanceFactor = -1; 
+                           break;
+                  case 0:  // B is the newly inserted node                      
+                           currentNode.balanceFactor = 0;
+                           a.balanceFactor = 0; 
+                           break;
+              }
+              
+              b.balanceFactor = 0;
+              currentNode.rightChild = this.rotateRight(a);
+              currentNode = this.rotateLeft(currentNode);
+              
+         }
+          
+          
         return currentNode;
     }
+      
+      public AVLNode rotateRight(AVLNode currentNode){
+          AVLNode a = currentNode.leftChild;
+          currentNode.leftChild = a.rightChild;
+          a.rightChild = currentNode;
+          
+          return a;
+      }
+      
+      
+       public AVLNode rotateLeft(AVLNode currentNode){
+          AVLNode a = currentNode.rightChild;
+          currentNode.rightChild = a.leftChild;
+          a.leftChild = currentNode;
+          
+          return a;
+      }
     
     
     
