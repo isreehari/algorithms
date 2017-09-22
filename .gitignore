@@ -49,4 +49,8 @@ hs_err_pid*
 /LeetCode/build/
 /CommonAlgorithms/nbproject/private/
 /CommonAlgorithms/build/
+<<<<<<< HEAD
 /JavaCollections/nbproject/private/
+=======
+/AdvanceDataStructures/nbproject/private/
+>>>>>>> 3cea1dcd479e58230982d1dffa52f39e68837ae6
