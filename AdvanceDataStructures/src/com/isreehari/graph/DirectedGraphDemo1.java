@@ -23,8 +23,8 @@ public class DirectedGraphDemo1 {
           this.adj = new boolean[MAX_VERTICES][MAX_VERTICES];
           this.vertexList = new Vertex[MAX_VERTICES];
           
-          // By default n=0, e = 0
-          // By default adj[u][v] = false
+         /*  By default n=0, e = 0
+          By default adj[u][v] = false */
     }
     
     public static void main(String[] args){        
