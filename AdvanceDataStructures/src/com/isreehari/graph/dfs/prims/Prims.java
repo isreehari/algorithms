@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.isreehari.graph.dfs.dijkstras;
+package com.isreehari.graph.dfs.prims;
+
 
 
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import java.util.Stack;
  *
  * @author sinukoll
  */
-public class DirectedWeightedGraph {
+public class Prims {
     
     public static final int MAX_VERTICES = 30;
     private int numberVerticies;
@@ -30,13 +31,13 @@ public class DirectedWeightedGraph {
     
     
     
-    public DirectedWeightedGraph(){
+    public Prims(){
         this.adjMatrix = new int[MAX_VERTICES][MAX_VERTICES];
         this.vertexList = new Vertex[MAX_VERTICES];
     }
     
     public static void main(String... args){
-        DirectedWeightedGraph matrix = new DirectedWeightedGraph();
+        Prims matrix = new Prims();
         
         matrix.insertVertex("zero");
         matrix.insertVertex("one");
@@ -77,35 +78,58 @@ public class DirectedWeightedGraph {
         matrix.display();
         
         System.out.println("Find the shortest path: ");
-        matrix.findPaths("one");
+        matrix.prims();
         System.out.println();
        
         
     }
     
-    public void dijkstra(int sourceVertexIndex){
+    public void prims(){
         int v, c;
         for(v = 0; v < this.numberVerticies; v++){
             this.vertexList[v].status = TEMPORARY;
-            this.vertexList[v].pathLength = INFINITY;
+            this.vertexList[v].length = INFINITY;
             this.vertexList[v].predecessor = NIL;
         }
-       
-        this.vertexList[sourceVertexIndex].pathLength = 0;
+        int numberEdgesInTree = 0;
+        int weightTree = 0;
+        int rootIndex = 0;
+        
+        this.vertexList[rootIndex].length = 0;
         
         while(true){
-            c = this.tempVertexMinPathLength();
+            c = this.tempVertexMinLength();
             
-            if(c == NIL)
-                return;
+            if(c == NIL){
+                
+                if(numberEdgesInTree == this.numberVerticies - 1){
+                    System.out.println("Weight of minimum spanning tree is " + weightTree);
+                    return;
+                }else{
+                    throw new RuntimeException("Graph is not connected, Spanning tree not possible");
+                }
+                
+                
+            }
+                
             
             this.vertexList[c].status = PERMANENT;
             
+            // Include edge ( vertexList[c].predecessor, c) in the tree 
+            
+            if(c != rootIndex){
+                numberEdgesInTree++;
+                System.out.println("(" + this.vertexList[c].predecessor + ", "+ c +")");
+                weightTree += this.adjMatrix[this.vertexList[c].predecessor][c];
+            }
+            
+            
+            
             for(v = 0; v < this.numberVerticies ; v++){
                   if(this.vertexList[v].status == TEMPORARY && this.isAdjacent(c,v)){
-                      if( (this.vertexList[c].pathLength + this.adjMatrix[c][v]) < this.vertexList[v].pathLength){
+                      if(  this.adjMatrix[c][v] < this.vertexList[v].length ){
                           this.vertexList[v].predecessor = c;
-                          this.vertexList[v].pathLength = this.vertexList[c].pathLength + this.adjMatrix[c][v];
+                          this.vertexList[v].length =   this.adjMatrix[c][v];
                       }
                   }
             }
@@ -115,14 +139,14 @@ public class DirectedWeightedGraph {
         
     }
     
-    private int tempVertexMinPathLength(){
+    private int tempVertexMinLength(){
         
         int min = INFINITY;
         int x = NIL;
         
         for(int v = 0; v < this.numberVerticies; v++){
-              if(this.vertexList[v].status == TEMPORARY && this.vertexList[v].pathLength < min){
-                  min = this.vertexList[v].pathLength;
+              if(this.vertexList[v].status == TEMPORARY && this.vertexList[v].length < min){
+                  min = this.vertexList[v].length;
                   x = v;
               }
         }
@@ -158,19 +182,7 @@ public class DirectedWeightedGraph {
     }
     
     
-    public void findPaths(String source){
-        int sourceIndex = this.getIndex(source);        
-        this.dijkstra(sourceIndex);
-        
-        System.out.println("Source Vertex : "+  source + " \n ");        
-        for(int v = 0; v < this.numberVerticies; v++){
-            System.out.println("Destination Vertex : " + this.vertexList[v]);
-            if(this.vertexList[v].pathLength == INFINITY)
-                System.out.println("There is no path from "+ source +" to vertex " + vertexList[v]);
-            else
-                this.findPath(sourceIndex,v);
-        }
-    }
+   
     
     
     
