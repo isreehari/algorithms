@@ -10,7 +10,8 @@ import java.util.EmptyStackException;
  * @author sinukoll
  */
 public class StackLinkedList {
-    private Node top;    
+    private Node top;  
+    
     public StackLinkedList(){
         this.top = null;
     }
