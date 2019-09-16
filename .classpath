@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="AdvanceDataStructures/src"/>
+	<classpathentry kind="src" path="BigONotation/src"/>
+	<classpathentry kind="src" path="BinarySearchTree/src"/>
+	<classpathentry kind="src" path="BinaryTree/src"/>
+	<classpathentry kind="src" path="CommonAlgorithms/src"/>
+	<classpathentry kind="src" path="DoubleLinkedList/src"/>
+	<classpathentry kind="src" path="GreekForGreek/GFG/src"/>
+	<classpathentry kind="src" path="GreekForGreek/Heap/src"/>
+	<classpathentry kind="src" path="HackerRank/src"/>
+	<classpathentry kind="src" path="HelloWorld/src"/>
+	<classpathentry kind="src" path="LeetCode/src"/>
+	<classpathentry kind="src" path="LinkedList/src"/>
+	<classpathentry kind="src" path="Recursion/src"/>
+	<classpathentry kind="src" path="Sort/src"/>
+	<classpathentry kind="src" path="StackQueues/src"/>
+	<classpathentry kind="src" path="TwoDimentionalSingleLinkedList/src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
